@@ -13,7 +13,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
 .orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(14,165,233,0.07) 0%,transparent 65%);top:-250px;right:-200px;}
 .orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%);bottom:-100px;left:-150px;}
-.sample-banner{position:relative;z-index:10;background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.06));border-bottom:1px solid rgba(245,158,11,0.3);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.5px;}
+.sample-banner{position:relative;z-index:10;background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.06));border-bottom:1px solid rgba(245,158,11,0.3);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.5px;text-align:center;}
 .sample-banner strong{color:#fde68a;}
 header{position:sticky;top:0;z-index:100;background:rgba(7,9,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
 .logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;}
@@ -35,35 +35,30 @@ h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-
 .pill-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:1px;line-height:1;}
 .pill-val span{color:var(--accent);}
 .pill-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
-.refresh-banner{position:relative;z-index:1;margin:0 16px 24px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(16,185,129,0.05));border:1px solid rgba(14,165,233,0.15);border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.refresh-banner{position:relative;z-index:1;margin:0 16px 16px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(16,185,129,0.05));border:1px solid rgba(14,165,233,0.15);border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 .rb-left{display:flex;align-items:center;gap:10px;}
 .rb-icon{font-size:20px;}
 .rb-title{font-size:13px;font-weight:600;color:#fff;}
 .rb-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
 .rb-next{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:8px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
-.section{position:relative;z-index:1;padding:0 16px 24px;}
+.enrich-note{position:relative;z-index:1;margin:0 16px 16px;background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:11px;color:#c4b5fd;font-family:'JetBrains Mono',monospace;}
+.section{position:relative;z-index:1;padding:0 16px 20px;}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
 .section-title span{color:var(--accent);}
-.cities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px;}
+.cities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
 .city-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;transition:all 0.2s;}
 .city-card.active{border-color:var(--accent);background:rgba(14,165,233,0.05);}
 .city-card.coming{opacity:0.6;}
-.city-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.city-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
 .city-name{font-size:13px;font-weight:600;color:#fff;}
 .city-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
 .badge-live{background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
 .badge-soon{background:rgba(245,158,11,0.12);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
-.badge-q3{background:rgba(139,92,246,0.12);color:var(--purple);border:1px solid rgba(139,92,246,0.2);}
-.city-stats{display:flex;gap:12px;}
-.cs{display:flex;flex-direction:column;gap:1px;}
-.cs-val{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;line-height:1;}
-.cs-val span{color:var(--accent);}
-.cs-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;}
-.city-refresh{margin-top:8px;font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;}
-.rdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.rdot-green{background:var(--green);}
-.rdot-amber{background:var(--amber);}
-.rdot-purple{background:var(--purple);}
+.badge-demand{background:rgba(139,92,246,0.12);color:var(--purple);border:1px solid rgba(139,92,246,0.2);}
+.city-note{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;}
+.rdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;background:var(--green);}
+.rdot-a{background:var(--amber);}
+.rdot-p{background:var(--purple);}
 .controls{position:relative;z-index:1;padding:0 16px 14px;display:flex;flex-direction:column;gap:10px;}
 .search-wrap{position:relative;}
 .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);}
@@ -71,29 +66,32 @@ input[type=text]{width:100%;background:var(--card);border:1px solid var(--border
 input[type=text]:focus{border-color:var(--accent);}
 input[type=text]::placeholder{color:var(--muted);}
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;}
-select{flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
+select{flex:1;min-width:110px;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
 select:focus{border-color:var(--accent);}
-.count-badge{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right;padding:0 2px;}
+.count-badge{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right;}
 .count-badge strong{color:var(--accent);}
 .table-wrap{position:relative;z-index:1;padding:0 16px 80px;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;min-width:900px;}
+table{width:100%;border-collapse:collapse;min-width:1200px;}
 thead tr{background:var(--surface);border-bottom:1px solid var(--border);}
 th{padding:10px 12px;text-align:left;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+th.e{color:#a78bfa;}
 tbody tr{border-bottom:1px solid rgba(26,37,53,0.6);transition:background 0.15s;}
 tbody tr:hover{background:var(--faint);}
 td{padding:11px 12px;font-size:12px;vertical-align:middle;}
-.td-name{font-weight:500;color:#fff;max-width:200px;}
+.td-name{font-weight:500;color:#fff;max-width:190px;}
 .td-name-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
-.td-addr{font-size:11px;color:var(--muted);max-width:180px;line-height:1.4;}
-.td-hours{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap;}
-.td-gps{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap;}
+.td-addr{font-size:11px;color:var(--muted);max-width:170px;line-height:1.4;}
+.td-enrich{font-size:11px;color:var(--text);max-width:160px;line-height:1.5;}
+.td-na{font-size:10px;color:var(--muted);opacity:0.4;font-style:italic;font-family:'JetBrains Mono',monospace;}
 .phone{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);white-space:nowrap;}
-.rating-wrap{display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:12px;}
+.website-link{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-decoration:none;}
+.website-link:hover{color:var(--accent2);text-decoration:underline;}
+.rating-wrap{display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:12px;white-space:nowrap;}
 .stars{color:var(--amber);font-size:10px;}
-.pop-score{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
-.website-link{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-decoration:none;white-space:nowrap;}
-.website-link:hover{color:var(--accent2);}
-.na{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);opacity:0.5;font-style:italic;}
+.reviews{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+.badge-yn{padding:2px 8px;border-radius:4px;font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:600;white-space:nowrap;}
+.yn-yes{background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
+.yn-acc{background:rgba(14,165,233,0.1);color:var(--accent2);border:1px solid rgba(14,165,233,0.2);}
 .score-wrap{display:flex;align-items:center;gap:6px;}
 .score-num{font-family:'Bebas Neue',sans-serif;font-size:18px;min-width:28px;}
 .score-bar{width:40px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
@@ -113,7 +111,7 @@ footer strong{color:var(--text);}
 <div class="orb orb2"></div>
 
 <div class="sample-banner">
-  ⚠ &nbsp;<strong>SAMPLE DATABASE</strong>&nbsp; — 50 records from New York City. &nbsp;|&nbsp; Full database available for any US city on request. &nbsp;|&nbsp; For presentation purposes only.
+  ⚠ &nbsp;<strong>SAMPLE DATABASE</strong>&nbsp; — 50 records · New York City · For presentation purposes only &nbsp;|&nbsp; Full database available for any US city on request
 </div>
 
 <header>
@@ -130,13 +128,13 @@ footer strong{color:var(--text);}
 <section class="hero">
   <div class="hero-tag">🇺🇸 United States · Dental Clinics · AI-Powered</div>
   <h1>BUSINESS INTELLIGENCE<br><span>LEADS SYSTEM</span></h1>
-  <p class="hero-sub">AI-powered dental clinic intelligence identifying high-potential prospects across US cities — scored, tiered and ready for your sales team.</p>
+  <p class="hero-sub">AI-powered dental clinic intelligence identifying high-potential prospects across US cities — enriched, scored and ready for your sales team.</p>
   <div class="stat-grid">
     <div class="pill"><div class="pill-val" id="totalCount">50</div><div class="pill-lbl">Sample Records</div></div>
     <div class="pill"><div class="pill-val"><span id="highCount">—</span></div><div class="pill-lbl">High Priority</div></div>
-    <div class="pill"><div class="pill-val" id="avgRating">—</div><div class="pill-lbl">Avg Rating</div></div>
+    <div class="pill"><div class="pill-val"><span>86</span>%</div><div class="pill-lbl">Enrichment Rate</div></div>
     <div class="pill"><div class="pill-val"><span>10+</span></div><div class="pill-lbl">US Cities Available</div></div>
-    <div class="pill pill-wide"><div class="pill-val"><span>Full</span></div><div class="pill-lbl">✓ Full Verified Database Available Per City — Contact LeadFlow</div></div>
+    <div class="pill pill-wide"><div class="pill-val"><span>Full</span></div><div class="pill-lbl">✓ Verified Database Available Per City — Contact LeadFlow</div></div>
   </div>
 </section>
 
@@ -145,34 +143,35 @@ footer strong{color:var(--text);}
     <div class="rb-icon">🔄</div>
     <div>
       <div class="rb-title">Intelligence Updated Monthly</div>
-      <div class="rb-sub">Sample prepared: June 2026 · New York City · Dental Clinics</div>
+      <div class="rb-sub">Sample prepared: June 2026 · New York City · Dental Clinics · AI Enriched</div>
     </div>
   </div>
   <div class="rb-next">Monthly Refresh Available</div>
 </div>
 
+<div class="enrich-note">
+  <span>🔬</span>
+  <span><strong>AI Enrichment —</strong> Fields marked * extracted via website analysis. N/A shown where website unavailable or data not detected.</span>
+</div>
+
 <div class="section">
-  <div class="section-title">Coverage — <span>Cities & Rollout</span></div>
+  <div class="section-title">Coverage — <span>US Cities</span></div>
   <div class="cities-grid">
     <div class="city-card active">
       <div class="city-top"><div class="city-name">New York City</div><div class="city-badge badge-live">● LIVE</div></div>
-      <div class="city-stats">
-        <div class="cs"><div class="cs-val"><span>50</span></div><div class="cs-lbl">This Sample</div></div>
-        <div class="cs"><div class="cs-val">Full</div><div class="cs-lbl">DB Available</div></div>
-      </div>
-      <div class="city-refresh"><div class="rdot rdot-green"></div>Updated June 2026</div>
+      <div class="city-note"><div class="rdot"></div>Sample ready · Full database available</div>
     </div>
     <div class="city-card coming">
       <div class="city-top"><div class="city-name">Los Angeles</div><div class="city-badge badge-soon">⏳ Coming Soon</div></div>
-      <div class="city-refresh" style="margin-top:0"><div class="rdot rdot-amber"></div>Available on request</div>
+      <div class="city-note"><div class="rdot rdot-a"></div>Available on request</div>
     </div>
     <div class="city-card coming">
       <div class="city-top"><div class="city-name">Chicago</div><div class="city-badge badge-soon">⏳ Coming Soon</div></div>
-      <div class="city-refresh" style="margin-top:0"><div class="rdot rdot-amber"></div>Available on request</div>
+      <div class="city-note"><div class="rdot rdot-a"></div>Available on request</div>
     </div>
     <div class="city-card coming">
-      <div class="city-top"><div class="city-name">Houston & More</div><div class="city-badge badge-q3">◷ On Demand</div></div>
-      <div class="city-refresh" style="margin-top:0"><div class="rdot rdot-purple"></div>Any US city available</div>
+      <div class="city-top"><div class="city-name">Any US City</div><div class="city-badge badge-demand">◷ On Demand</div></div>
+      <div class="city-note"><div class="rdot rdot-p"></div>Houston · Dallas · Phoenix & more</div>
     </div>
   </div>
 </div>
@@ -180,24 +179,41 @@ footer strong{color:var(--text);}
 <div class="controls">
   <div class="search-wrap">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Search clinic name, neighbourhood, address...">
+    <input type="text" id="searchInput" placeholder="Search clinic, neighbourhood, services...">
   </div>
   <div class="filter-row">
     <select id="areaFilter">
       <option value="">All Neighbourhoods</option>
+      <option>Chelsea</option>
+      <option>East Village</option>
+      <option>Financial District</option>
+      <option>Gramercy</option>
+      <option>Harlem</option>
+      <option>Inwood</option>
+      <option>Jackson Heights</option>
+      <option>Lower East Side</option>
       <option>Midtown</option>
       <option>Midtown East</option>
-      <option>Financial District</option>
+      <option>SoHo</option>
       <option>Tribeca</option>
       <option>Upper East Side</option>
       <option>Upper West Side</option>
-      <option>SoHo</option>
-      <option>Chelsea</option>
-      <option>Harlem</option>
-      <option>Lower East Side</option>
-      <option>East Village</option>
       <option>Washington Heights</option>
-      <option>Jackson Heights</option>
+    </select>
+    <select id="serviceFilter">
+      <option value="">All Services</option>
+      <option>General Dentistry</option>
+      <option>Cosmetic</option>
+      <option>Implants</option>
+      <option>Orthodontics</option>
+      <option>Oral Surgery</option>
+      <option>Emergency</option>
+      <option>Periodontics</option>
+      <option>Endodontics</option>
+    </select>
+    <select id="bookingFilter">
+      <option value="">All</option>
+      <option value="Yes">Online Booking</option>
     </select>
     <select id="tierFilter">
       <option value="">All Tiers</option>
@@ -223,6 +239,11 @@ footer strong{color:var(--text);}
         <th>Reviews</th>
         <th>Hours</th>
         <th>GPS</th>
+        <th class="e">Services *</th>
+        <th class="e">Booking *</th>
+        <th class="e">Insurance *</th>
+        <th class="e">Social *</th>
+        <th class="e">Tech *</th>
         <th>Score</th>
         <th>Priority</th>
       </tr>
@@ -239,71 +260,71 @@ footer strong{color:var(--text);}
 
 <script>
 const DATA=[
-  {name:"209 NYC Dental",phone:"(212) 355-2290",addr:"209 E 56th St 1st floor, New York, NY 10022",area:"Midtown East",website:"209nycdental.com",rating:4.9,reviews:1830,hours:"Mon: 7:30AM–6:30PM",lat:40.7594,lng:-73.9671,score:100,tier:"High"},
-  {name:"Sky Dental",phone:"(212) 600-1996",addr:"111 Broadway Suite 1304, New York, NY 10006",area:"Financial District",website:"skydentalnyc.com",rating:4.9,reviews:2654,hours:"Mon: 8:00AM–6:00PM",lat:40.7087,lng:-74.0115,score:100,tier:"High"},
-  {name:"Pearl Dental NYC",phone:"(212) 344-9317",addr:"233 Broadway Suite 1801, New York, NY 10279",area:"Financial District",website:"pearldentalnyc.com",rating:5.0,reviews:475,hours:"Mon: 8:00AM–5:00PM",lat:40.7124,lng:-74.0079,score:100,tier:"High"},
-  {name:"Midtown Dental Care Associates",phone:"(212) 685-4730",addr:"12 E 41st St Ste 1100, New York, NY 10017",area:"Midtown",website:"midtowndentalcareassociates.com",rating:4.9,reviews:573,hours:"Mon: 8:00AM–7:00PM",lat:40.7524,lng:-73.9807,score:100,tier:"High"},
-  {name:"Expert Dental Midtown",phone:"(212) 763-3383",addr:"110 E 40th St #104, New York, NY 10016",area:"Midtown",website:"expertdentalnyc.com",rating:4.5,reviews:2156,hours:"Mon: 9:00AM–7:00PM",lat:40.7504,lng:-73.9780,score:100,tier:"High"},
-  {name:"New York Dental Office",phone:"(212) 548-3261",addr:"245 E 63rd St #110, New York, NY 10065",area:"Upper East Side",website:"newyorkdentaloffice.com",rating:4.9,reviews:469,hours:"Mon: 8:30AM–5:00PM",lat:40.7633,lng:-73.9627,score:100,tier:"High"},
-  {name:"NYC Smile Spa",phone:"(646) 374-2242",addr:"30 E 60th St Ste 1201, New York, NY 10022",area:"Midtown East",website:"nycsmilespa.com",rating:4.9,reviews:395,hours:"Mon: 8:00AM–6:00PM",lat:40.7637,lng:-73.9702,score:100,tier:"High"},
-  {name:"Studio Smiles NYC",phone:"(646) 470-1376",addr:"41 Park Ave #1C, New York, NY 10016",area:"Midtown",website:"studiosmilesnyc.com",rating:4.9,reviews:611,hours:"Mon: 8:00AM–6:00PM",lat:40.7484,lng:-73.9800,score:100,tier:"High"},
-  {name:"212 Dental Care",phone:"(888) 506-9583",addr:"286 Madison Ave 10th Floor, New York, NY 10017",area:"Midtown",website:"212dentalcare.com",rating:4.7,reviews:3285,hours:"Mon: 8:00AM–8:00PM",lat:40.7517,lng:-73.9803,score:100,tier:"High"},
-  {name:"Lumia Dental PLLC",phone:"(212) 287-1275",addr:"160 Broadway #1004, New York, NY 10038",area:"Financial District",website:"lumiadental.com",rating:4.9,reviews:768,hours:"Mon: 8:00AM–6:00PM",lat:40.7094,lng:-74.0100,score:100,tier:"High"},
-  {name:"172 NYC Dental",phone:"(646) 921-5541",addr:"172 Madison Ave, New York, NY 10016",area:"Midtown",website:"172nycdental.com",rating:4.8,reviews:260,hours:"Mon: 7:30AM–6:30PM",lat:40.7474,lng:-73.9836,score:100,tier:"High"},
-  {name:"Midtown Dental Group Fashion District",phone:"(212) 730-4440",addr:"241 W 37th St Ground Floor, New York, NY 10018",area:"Midtown",website:"midtowndentalgroup.com",rating:4.9,reviews:734,hours:"Mon: 9:00AM–5:45PM",lat:40.7539,lng:-73.9909,score:100,tier:"High"},
-  {name:"ORAL Dental Studio NYC",phone:"(646) 663-7633",addr:"131 Essex St Fl 2, New York, NY 10002",area:"Lower East Side",website:"oraldentalstudio.com",rating:4.9,reviews:457,hours:"Mon: 9:00AM–6:00PM",lat:40.7200,lng:-73.9876,score:100,tier:"High"},
-  {name:"Esthetix Dentist NYC",phone:"(212) 795-9675",addr:"285 Fort Washington Ave, New York, NY 10032",area:"Washington Heights",website:"esthetixdentalspa.com",rating:4.8,reviews:1187,hours:"Mon: 8:00AM–8:00PM",lat:40.8450,lng:-73.9408,score:100,tier:"High"},
-  {name:"Tribeca Dental Care",phone:"(212) 431-4582",addr:"402 Broadway, New York, NY 10013",area:"Tribeca",website:"tribecanydentistoffice.com",rating:4.8,reviews:1153,hours:"Mon: 10:00AM–6:30PM",lat:40.7187,lng:-74.0022,score:100,tier:"High"},
-  {name:"Maiden Lane Dental",phone:"(212) 509-4585",addr:"80 Maiden Ln #702, New York, NY 10038",area:"Financial District",website:"maidenlanedental.com",rating:4.9,reviews:507,hours:"Mon: 8:00AM–6:00PM",lat:40.7071,lng:-74.0078,score:100,tier:"High"},
-  {name:"Preferred Dental Care Chelsea",phone:"(212) 594-7171",addr:"135 W 27th St, New York, NY 10001",area:"Chelsea",website:"preferreddentalcare.com",rating:4.9,reviews:2341,hours:"Mon: 7:00AM–9:00PM",lat:40.7463,lng:-73.9924,score:100,tier:"High"},
-  {name:"PDA Dental",phone:"(212) 256-9583",addr:"150 Broadway #1310, New York, NY 10038",area:"Financial District",website:"pdadental.com",rating:4.7,reviews:730,hours:"Mon: 8:00AM–6:00PM",lat:40.7092,lng:-74.0101,score:100,tier:"High"},
-  {name:"TriBeCa Dental Associates",phone:"(212) 671-3749",addr:"21 Murray St 4th floor, New York, NY 10007",area:"Tribeca",website:"tribeca.dental",rating:4.9,reviews:1501,hours:"Mon: 8:00AM–4:00PM",lat:40.7138,lng:-74.0082,score:100,tier:"High"},
-  {name:"Park Smiles NYC",phone:"(212) 988-6724",addr:"1175 Park Ave #1d, New York, NY 10128",area:"Upper East Side",website:"parksmilesnyc.com",rating:4.8,reviews:546,hours:"Mon: 7:45AM–5:00PM",lat:40.7844,lng:-73.9538,score:100,tier:"High"},
-  {name:"Sachar Dental NYC",phone:"(212) 752-1163",addr:"20 E 46th St Rm 1301, New York, NY 10017",area:"Midtown",website:"sachardental.com",rating:5.0,reviews:414,hours:"Mon: 8:00AM–6:00PM",lat:40.7555,lng:-73.9779,score:100,tier:"High"},
-  {name:"New York General Dentistry",phone:"(212) 838-0842",addr:"133 E 58th St Ste 409, New York, NY 10022",area:"Midtown East",website:"newyorkgeneraldentistry.com",rating:5.0,reviews:371,hours:"Mon: 8:30AM–5:30PM",lat:40.7620,lng:-73.9689,score:100,tier:"High"},
-  {name:"Les Belles NYC Dentistry",phone:"(212) 804-8884",addr:"110 E 60th St #902, New York, NY 10022",area:"Midtown East",website:"lesbellesnyc.com",rating:4.9,reviews:672,hours:"Mon: 7:00AM–8:00PM",lat:40.7631,lng:-73.9688,score:100,tier:"High"},
-  {name:"The Exchange Dental Group",phone:"(646) 780-5410",addr:"39 Broadway Rm 2115, New York, NY 10006",area:"Financial District",website:"theexchangedentalgroup.com",rating:4.9,reviews:1249,hours:"Mon: 8:00AM–7:00PM",lat:40.7063,lng:-74.0133,score:100,tier:"High"},
-  {name:"Manhattan Dental Spa",phone:"(212) 683-2530",addr:"200 Madison Ave Ste 2201, New York, NY 10016",area:"Midtown",website:"manhattandentalspa.com",rating:4.9,reviews:728,hours:"Mon: 9:00AM–7:00PM",lat:40.7487,lng:-73.9825,score:100,tier:"High"},
-  {name:"Smile Arts of NY",phone:"(212) 537-6923",addr:"30 E 40th St #105, New York, NY 10016",area:"Midtown",website:"smileartsofny.com",rating:4.8,reviews:797,hours:"Mon: 8:00AM–7:30PM",lat:40.7512,lng:-73.9796,score:100,tier:"High"},
-  {name:"SoHo Dental Group NYC",phone:"(212) 878-7646",addr:"552 Broadway #505, New York, NY 10012",area:"SoHo",website:"sohodentalgroup.com",rating:4.8,reviews:540,hours:"Mon: 9:00AM–6:00PM",lat:40.7237,lng:-73.9980,score:100,tier:"High"},
-  {name:"Diamond District Dental NYC",phone:"(212) 759-5595",addr:"10 W 46th St #1401, New York, NY 10036",area:"Midtown",website:"dddentalnyc.com",rating:4.9,reviews:595,hours:"Mon: 9:00AM–6:00PM",lat:40.7563,lng:-73.9800,score:100,tier:"High"},
-  {name:"Manhattan Bridge Orthodontics",phone:"(212) 274-0477",addr:"77 Bowery 6th Floor, New York, NY 10002",area:"Lower East Side",website:"manhattanbridgeortho.com",rating:4.9,reviews:1514,hours:"Mon: 10:00AM–7:00PM",lat:40.7167,lng:-73.9955,score:100,tier:"High"},
-  {name:"iSmile Orthodontics NYC",phone:"(646) 863-2181",addr:"4779 Broadway, New York, NY 10034",area:"Washington Heights",website:"ismileorthodontics.com",rating:4.9,reviews:1006,hours:"Mon: 9:00AM–6:00PM",lat:40.8660,lng:-73.9266,score:100,tier:"High"},
-  {name:"Manhattan EastSide Orthodontics",phone:"(212) 289-8989",addr:"207 E 94th St #501, New York, NY 10128",area:"Upper East Side",website:"manhattaneastsideorthodontics.com",rating:5.0,reviews:429,hours:"Mon: 9:00AM–5:00PM",lat:40.7838,lng:-73.9494,score:100,tier:"High"},
-  {name:"Bronsky Orthodontics",phone:"(212) 758-0040",addr:"530 Park Ave APT 1G, New York, NY 10065",area:"Upper East Side",website:"bronskyorthodontics.com",rating:5.0,reviews:481,hours:"Mon: 8:00AM–5:00PM",lat:40.7641,lng:-73.9695,score:100,tier:"High"},
-  {name:"Smile Pop Orthodontist",phone:"(646) 770-2091",addr:"76 Madison Ave, New York, NY 10016",area:"Midtown",website:"smilepop.com",rating:5.0,reviews:444,hours:"Mon: 10:00AM–4:00PM",lat:40.7440,lng:-73.9861,score:100,tier:"High"},
-  {name:"Brite Orthodontics Harlem",phone:"(212) 866-9800",addr:"1851 Adam Clayton Powell Jr Blvd, New York, NY 10026",area:"Harlem",website:"briteorthodontics.com",rating:4.9,reviews:673,hours:"Mon: 9:00AM–5:00PM",lat:40.8009,lng:-73.9537,score:100,tier:"High"},
-  {name:"Fellow Orthodontist",phone:"(917) 451-2999",addr:"49 E 18th St, New York, NY 10003",area:"East Village",website:"felloworthodontist.com",rating:5.0,reviews:234,hours:"Mon: 10:00AM–5:00PM",lat:40.7376,lng:-73.9892,score:100,tier:"High"},
-  {name:"Goodman Orthodontics",phone:"(212) 688-4663",addr:"440 E 57th St B, New York, NY 10022",area:"Midtown East",website:"goodortho.com",rating:5.0,reviews:275,hours:"Mon: 8:00AM–4:00PM",lat:40.7575,lng:-73.9616,score:100,tier:"High"},
-  {name:"Straight Set Orthodontics Harlem",phone:"(212) 996-7300",addr:"241 Malcolm X Blvd, New York, NY 10027",area:"Harlem",website:"straightsetortho.com",rating:4.8,reviews:677,hours:"Mon: 9:00AM–6:00PM",lat:40.8061,lng:-73.9472,score:100,tier:"High"},
-  {name:"Bronsky Orthodontics Tribeca",phone:"(212) 758-0040",addr:"15 Harrison St Ground Floor, New York, NY 10013",area:"Tribeca",website:"bronskyorthodontics.com",rating:5.0,reviews:271,hours:"Mon: 8:00AM–5:00PM",lat:40.7186,lng:-74.0099,score:100,tier:"High"},
-  {name:"Upper Eastside Orthodontists",phone:"(212) 360-0835",addr:"153 E 87th St APT 1B, New York, NY 10128",area:"Upper East Side",website:"ueso.org",rating:4.9,reviews:476,hours:"Mon: Closed",lat:40.7802,lng:-73.9546,score:93,tier:"High"},
-  {name:"Jackson Heights Orthodontics",phone:"(718) 335-4444",addr:"37-43 77th St, Jackson Heights, NY 11372",area:"Jackson Heights",website:"jhoortho.com",rating:4.8,reviews:1337,hours:"Mon: 9:00AM–5:00PM",lat:40.7480,lng:-73.8886,score:100,tier:"High"},
-  {name:"Gramercy Orthodontics",phone:"(212) 777-9177",addr:"200 E 15th St STE PRB, New York, NY 10003",area:"East Village",website:"gramercyorthonyc.com",rating:5.0,reviews:161,hours:"Mon: 10:00AM–7:00PM",lat:40.7338,lng:-73.9865,score:93,tier:"High"},
-  {name:"House of Orthodontia Manhattan",phone:"(212) 392-4789",addr:"601 E 12th St, New York, NY 10009",area:"East Village",website:"houseoforthodontia.com",rating:4.9,reviews:101,hours:"Mon: Closed",lat:40.7282,lng:-73.9788,score:80,tier:"High"},
-  {name:"Gibbs Orthodontic Associates",phone:"(212) 535-4111",addr:"40 E 84th St, New York, NY 10028",area:"Upper East Side",website:"gibbsortho.com",rating:4.9,reviews:186,hours:"Mon: 9:00AM–5:00PM",lat:40.7793,lng:-73.9595,score:93,tier:"High"},
-  {name:"Manhattan Family Orthodontics",phone:"(347) 767-5668",addr:"207 E 63rd St, New York, NY 10022",area:"Midtown East",website:"manhattanfamilyorthodontics.com",rating:4.9,reviews:159,hours:"Mon: 1:00PM–6:00PM",lat:40.7640,lng:-73.9642,score:93,tier:"High"},
-  {name:"Salzer Orthodontics",phone:"(212) 755-2333",addr:"553 Park Ave, New York, NY 10065",area:"Upper East Side",website:"lsortho.com",rating:5.0,reviews:177,hours:"Mon: 9:00AM–6:00PM",lat:40.7645,lng:-73.9683,score:93,tier:"High"},
-  {name:"Central Park West Orthodontics",phone:"(917) 336-8548",addr:"327 Central Park W #1a, New York, NY 10025",area:"Upper West Side",website:"cpworthodontic.com",rating:4.9,reviews:135,hours:"Mon: 10:00AM–5:00PM",lat:40.7897,lng:-73.9665,score:93,tier:"High"},
-  {name:"Wall Street Orthodontics",phone:"(212) 871-9835",addr:"111 Broadway APT 1707, New York, NY 10006",area:"Financial District",website:"wallstreetortho.com",rating:4.9,reviews:87,hours:"Mon: 9:00AM–5:00PM",lat:40.7087,lng:-74.0115,score:77,tier:"High"},
-  {name:"NYC Orthodontics",phone:"(212) 245-5121",addr:"30 Central Park S RM 2A, New York, NY 10019",area:"Midtown",website:"orthonyc.com",rating:5.0,reviews:54,hours:"Mon: 12:00PM–6:30PM",lat:40.7650,lng:-73.9751,score:77,tier:"High"},
-  {name:"NYC Dental Center",phone:"(646) 861-3070",addr:"216 E 39th St #1, New York, NY 10016",area:"Midtown",website:"nyc-dental-center.com",rating:4.4,reviews:255,hours:"Mon: 10:00AM–6:00PM",lat:40.7484,lng:-73.9752,score:80,tier:"High"},
-  {name:"New York University College of Dentistry",phone:"(212) 998-9800",addr:"345 E 24th St, New York, NY 10010",area:"Gramercy",website:"dental.nyu.edu",rating:3.6,reviews:1228,hours:"Mon: 8:00AM–8:00PM",lat:40.7378,lng:-73.9784,score:63,tier:"Medium"},
+  {name:"209 NYC Dental",phone:"(212) 355-2290",addr:"209 E 56th St 1st floor, NY 10022",area:"Midtown East",website:"209nycdental.com",wfull:"https://www.209nycdental.com/",rating:4.9,reviews:1830,hours:"Mon: 7:30AM-6:30PM",lat:40.7594,lng:-73.9671,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, Twitter/X, LinkedIn, YouTube",tech:"ZocDoc, Teledentistry, Digital Imaging",score:100,tier:"High"},
+  {name:"NY University College of Dentistry",phone:"(212) 998-9800",addr:"345 E 24th St, NY 10010",area:"Gramercy",website:"dental.nyu.edu",wfull:"http://dental.nyu.edu/",rating:3.6,reviews:1228,hours:"Mon: 8:00AM-8:00PM",lat:40.7378,lng:-73.9784,services:"N/A",booking:"N/A",insurance:"N/A",social:"N/A",tech:"N/A",score:63,tier:"Medium"},
+  {name:"Sky Dental",phone:"(212) 600-1996",addr:"111 Broadway Suite 1304, NY 10006",area:"Financial District",website:"skydentalnyc.com",wfull:"https://skydentalnyc.com/",rating:4.9,reviews:2654,hours:"Mon: 8:00AM-6:00PM",lat:40.7087,lng:-74.0115,services:"General Dentistry, Cosmetic, Orthodontics, Endodontics",booking:"Yes",insurance:"N/A",social:"Facebook, Instagram, YouTube",tech:"Patient Portal",score:100,tier:"High"},
+  {name:"New York Dental Office",phone:"(212) 548-3261",addr:"245 E 63rd St #110, NY 10065",area:"Upper East Side",website:"newyorkdentaloffice.com",wfull:"https://www.newyorkdentaloffice.com/",rating:4.9,reviews:469,hours:"Mon: 8:30AM-5:00PM",lat:40.7633,lng:-73.9627,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Twitter/X",tech:"ZocDoc",score:100,tier:"High"},
+  {name:"ORAL Dental Studio NYC",phone:"(646) 663-7633",addr:"131 Essex St Fl 2, NY 10002",area:"Lower East Side",website:"oraldentalstudio.com",wfull:"https://www.oraldentalstudio.com/",rating:4.9,reviews:458,hours:"Mon: 9:00AM-6:00PM",lat:40.7200,lng:-73.9876,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, LinkedIn",tech:"Digital Imaging, Laser Dentistry",score:100,tier:"High"},
+  {name:"Expert Dental - Midtown",phone:"(212) 763-3383",addr:"110 E 40th St #104, NY 10016",area:"Midtown",website:"expertdentalnyc.com",wfull:"https://www.expertdentalnyc.com/",rating:4.5,reviews:2156,hours:"Mon: 9:00AM-7:00PM",lat:40.7504,lng:-73.9780,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram",tech:"Digital Imaging, Laser Dentistry",score:100,tier:"High"},
+  {name:"Pearl Dental NYC",phone:"(212) 344-9317",addr:"233 Broadway Suite 1801, NY 10279",area:"Financial District",website:"pearldentalnyc.com",wfull:"https://www.pearldentalnyc.com/",rating:5.0,reviews:475,hours:"Mon: 8:00AM-5:00PM",lat:40.7124,lng:-74.0079,services:"N/A",booking:"N/A",insurance:"N/A",social:"N/A",tech:"N/A",score:100,tier:"High"},
+  {name:"Midtown Dental Care Associates",phone:"(212) 685-4730",addr:"12 E 41st St Ste 1100, NY 10017",area:"Midtown",website:"midtowndentalcareassociates.com",wfull:"https://www.midtowndentalcareassociates.com/",rating:4.9,reviews:573,hours:"Mon: 8:00AM-7:00PM",lat:40.7524,lng:-73.9807,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"N/A",insurance:"N/A",social:"Facebook, Instagram",tech:"N/A",score:100,tier:"High"},
+  {name:"NYC Dental Center",phone:"(646) 861-3070",addr:"216 E 39th St #1, NY 10016",area:"Midtown",website:"nyc-dental-center.com",wfull:"https://nyc-dental-center.com/",rating:4.4,reviews:255,hours:"Mon: 10:00AM-6:00PM",lat:40.7484,lng:-73.9752,services:"Cosmetic, Implants, Periodontics, Oral Surgery",booking:"Yes",insurance:"Accepted",social:"N/A",tech:"N/A",score:100,tier:"High"},
+  {name:"NYC Smile Spa",phone:"(646) 374-2242",addr:"30 E 60th St Ste 1201, NY 10022",area:"Midtown East",website:"nycsmilespa.com",wfull:"https://www.nycsmilespa.com/",rating:4.9,reviews:395,hours:"Mon: 8:00AM-6:00PM",lat:40.7637,lng:-73.9702,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"N/A",social:"Facebook, Instagram, YouTube",tech:"N/A",score:100,tier:"High"},
+  {name:"212 Dental Care",phone:"(888) 506-9583",addr:"286 Madison Ave 10th Floor, NY 10017",area:"Midtown",website:"212dentalcare.com",wfull:"http://212dentalcare.com/",rating:4.7,reviews:3285,hours:"Mon: 8:00AM-8:00PM",lat:40.7517,lng:-73.9803,services:"N/A",booking:"N/A",insurance:"N/A",social:"N/A",tech:"N/A",score:100,tier:"High"},
+  {name:"SoHo Dental Group NYC",phone:"(212) 878-7646",addr:"552 Broadway #505, NY 10012",area:"SoHo",website:"sohodentalgroup.com",wfull:"https://www.sohodentalgroup.com/",rating:4.8,reviews:540,hours:"Mon: 9:00AM-6:00PM",lat:40.7237,lng:-73.9980,services:"N/A",booking:"N/A",insurance:"N/A",social:"N/A",tech:"N/A",score:100,tier:"High"},
+  {name:"Studio Smiles NYC",phone:"(646) 470-1376",addr:"41 Park Ave #1C, NY 10016",area:"Midtown",website:"studiosmilesnyc.com",wfull:"http://www.studiosmilesnyc.com/",rating:4.9,reviews:611,hours:"Mon: 8:00AM-6:00PM",lat:40.7484,lng:-73.9800,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, Twitter/X",tech:"N/A",score:100,tier:"High"},
+  {name:"Lumia Dental PLLC",phone:"(212) 287-1275",addr:"160 Broadway #1004, NY 10038",area:"Financial District",website:"lumiadental.com",wfull:"https://www.lumiadental.com/",rating:4.9,reviews:768,hours:"Mon: 8:00AM-6:00PM",lat:40.7094,lng:-74.0100,services:"Cosmetic, Orthodontics, Periodontics, Endodontics",booking:"Yes",insurance:"N/A",social:"Facebook, Instagram, Twitter/X, LinkedIn",tech:"ZocDoc",score:100,tier:"High"},
+  {name:"My NYC Dentist - Hudson Street",phone:"(212) 359-0064",addr:"90 Vandam St, NY 10013",area:"Tribeca",website:"mynyc-dentist.com",wfull:"https://www.mynyc-dentist.com/",rating:4.9,reviews:289,hours:"Mon: 8:30AM-6:00PM",lat:40.7266,lng:-74.0081,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram",tech:"ZocDoc",score:100,tier:"High"},
+  {name:"Diamond District Dental NYC",phone:"(212) 759-5595",addr:"10 W 46th St #1401, NY 10036",area:"Midtown",website:"dddentalnyc.com",wfull:"https://www.dddentalnyc.com/",rating:4.9,reviews:595,hours:"Mon: 9:00AM-6:00PM",lat:40.7563,lng:-73.9800,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, YouTube, TikTok",tech:"ZocDoc, Laser Dentistry",score:100,tier:"High"},
+  {name:"Wall Street Dental Spa",phone:"(212) 514-5514",addr:"30 Wall St #720, NY 10005",area:"Financial District",website:"wallstdentalspanyc.com",wfull:"https://wallstdentalspanyc.com/",rating:4.8,reviews:1406,hours:"Mon: 9:00AM-6:00PM",lat:40.7070,lng:-74.0103,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, Twitter/X, YouTube",tech:"Digital Imaging",score:100,tier:"High"},
+  {name:"Smile Cafe Dental Spa",phone:"(212) 779-7743",addr:"45 Park Ave Unit 1, NY 10016",area:"Midtown",website:"smilecafeny.com",wfull:"http://www.smilecafeny.com/",rating:4.8,reviews:1099,hours:"Mon: 9:00AM-8:00PM",lat:40.7487,lng:-73.9797,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram, YouTube",tech:"ZocDoc, Digital Imaging, Same-Day Crowns, Laser Dentistry",score:100,tier:"High"},
+  {name:"172 NYC Dental",phone:"(646) 921-5541",addr:"172 Madison Ave, NY 10016",area:"Midtown",website:"172nycdental.com",wfull:"https://172nycdental.com/",rating:4.8,reviews:260,hours:"Mon: 7:30AM-6:30PM",lat:40.7474,lng:-73.9836,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, Twitter/X",tech:"N/A",score:100,tier:"High"},
+  {name:"New York General Dentistry",phone:"(212) 838-0842",addr:"133 E 58th St Ste 409, NY 10022",area:"Midtown East",website:"newyorkgeneraldentistry.com",wfull:"https://newyorkgeneraldentistry.com/",rating:5.0,reviews:371,hours:"Mon: 8:30AM-5:30PM",lat:40.7620,lng:-73.9689,services:"General Dentistry, Cosmetic, Orthodontics, Endodontics",booking:"N/A",insurance:"N/A",social:"Instagram",tech:"Laser Dentistry",score:100,tier:"High"},
+  {name:"TriBeCa Dental Associates",phone:"(212) 671-3749",addr:"21 Murray St 4th floor, NY 10007",area:"Tribeca",website:"tribeca.dental",wfull:"https://tribeca.dental/",rating:4.9,reviews:1502,hours:"Mon: 8:00AM-4:00PM",lat:40.7138,lng:-74.0082,services:"Cosmetic, Implants, Orthodontics, Periodontics",booking:"N/A",insurance:"N/A",social:"Facebook, Instagram",tech:"Digital Imaging, Same-Day Crowns",score:100,tier:"High"},
+  {name:"Midtown Dental Group Fashion District",phone:"(212) 730-4440",addr:"241 W 37th St Ground Floor, NY 10018",area:"Midtown",website:"midtowndentalgroup.com",wfull:"http://www.midtowndentalgroup.com/",rating:4.9,reviews:734,hours:"Mon: 9:00AM-5:45PM",lat:40.7539,lng:-73.9909,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram",tech:"ZocDoc",score:100,tier:"High"},
+  {name:"Park Smiles NYC",phone:"(212) 988-6724",addr:"1175 Park Ave #1d, NY 10128",area:"Upper East Side",website:"parksmilesnyc.com",wfull:"https://www.parksmilesnyc.com/",rating:4.8,reviews:546,hours:"Mon: 7:45AM-5:00PM",lat:40.7844,lng:-73.9538,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram, YouTube",tech:"Digital Imaging, Same-Day Crowns, Laser Dentistry",score:100,tier:"High"},
+  {name:"Midtown Dental Group Upper East Side",phone:"(212) 588-1809",addr:"30 E 60th St Ste 2402, NY 10022",area:"Midtown East",website:"midtowndentalgroup.com",wfull:"https://midtowndentalgroup.com/",rating:4.9,reviews:505,hours:"Mon: 9:00AM-5:00PM",lat:40.7637,lng:-73.9702,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram",tech:"ZocDoc",score:100,tier:"High"},
+  {name:"My NYC Dentist - 34th Street",phone:"(212) 564-8164",addr:"225 W 35th St #2, NY 10001",area:"Chelsea",website:"mynyc-dentist.com",wfull:"http://www.mynyc-dentist.com/",rating:4.7,reviews:498,hours:"Mon: 8:30AM-6:00PM",lat:40.7523,lng:-73.9911,services:"General Dentistry, Cosmetic, Implants, Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram",tech:"ZocDoc",score:100,tier:"High"},
+  {name:"Group Health Dental",phone:"(332) 249-1842",addr:"230 W 41st St 15th Floor, NY 10036",area:"Midtown",website:"grouphealthdental.com",wfull:"https://grouphealthdental.com/",rating:4.5,reviews:1531,hours:"Mon: 9:00AM-5:00PM",lat:40.7557,lng:-73.9889,services:"General Dentistry, Cosmetic, Orthodontics, Periodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram",tech:"N/A",score:100,tier:"High"},
+  {name:"Manhattan Bridge Orthodontics",phone:"(212) 274-0477",addr:"77 Bowery 6th Floor, NY 10002",area:"Lower East Side",website:"manhattanbridgeortho.com",wfull:"https://www.manhattanbridgeortho.com/",rating:4.9,reviews:1514,hours:"Mon: 10:00AM-7:00PM",lat:40.7167,lng:-73.9955,services:"Orthodontics",booking:"Yes",insurance:"N/A",social:"Facebook, Instagram, YouTube",tech:"N/A",score:100,tier:"High"},
+  {name:"iSmile Orthodontics - NYC",phone:"(646) 863-2181",addr:"4779 Broadway, NY 10034",area:"Inwood",website:"ismileorthodontics.com",wfull:"https://ismileorthodontics.com/",rating:4.9,reviews:1006,hours:"Mon: 9:00AM-6:00PM",lat:40.8660,lng:-73.9266,services:"Orthodontics",booking:"N/A",insurance:"N/A",social:"Facebook, Instagram, Twitter/X, LinkedIn, YouTube",tech:"Patient Portal",score:100,tier:"High"},
+  {name:"NYC Orthodontics",phone:"(212) 245-5121",addr:"30 Central Park S RM 2A, NY 10019",area:"Midtown",website:"orthonyc.com",wfull:"https://www.orthonyc.com/",rating:5.0,reviews:54,hours:"Mon: 12:00-6:30PM",lat:40.7650,lng:-73.9751,services:"Cosmetic, Orthodontics, Endodontics",booking:"Yes",insurance:"Accepted",social:"N/A",tech:"ZocDoc, Digital Imaging",score:100,tier:"High"},
+  {name:"Brite Orthodontics - Harlem",phone:"(212) 866-9800",addr:"1851 Adam Clayton Powell Jr Blvd, NY 10026",area:"Harlem",website:"briteorthodontics.com",wfull:"https://www.briteorthodontics.com/",rating:4.9,reviews:673,hours:"Mon: 9:00AM-5:00PM",lat:40.8009,lng:-73.9537,services:"General Dentistry, Orthodontics, Periodontics, Emergency",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, LinkedIn",tech:"N/A",score:100,tier:"High"},
+  {name:"Goodman Orthodontics",phone:"(212) 688-4663",addr:"440 E 57th St B, NY 10022",area:"Midtown East",website:"goodortho.com",wfull:"http://www.goodortho.com/",rating:5.0,reviews:275,hours:"Mon: 8:00AM-4:00PM",lat:40.7575,lng:-73.9616,services:"Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram, YouTube, TikTok",tech:"N/A",score:100,tier:"High"},
+  {name:"Gramercy Orthodontics",phone:"(212) 777-9177",addr:"200 E 15th St STE PRB, NY 10003",area:"East Village",website:"gramercyorthonyc.com",wfull:"https://gramercyorthonyc.com/",rating:5.0,reviews:161,hours:"Mon: 10:00AM-7:00PM",lat:40.7338,lng:-73.9865,services:"Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram",tech:"N/A",score:100,tier:"High"},
+  {name:"Bronsky Orthodontics",phone:"(212) 758-0040",addr:"530 Park Ave APT 1G, NY 10065",area:"Upper East Side",website:"bronskyorthodontics.com",wfull:"http://www.bronskyorthodontics.com/",rating:5.0,reviews:481,hours:"Mon: 8:00AM-5:00PM",lat:40.7641,lng:-73.9695,services:"Orthodontics",booking:"N/A",insurance:"N/A",social:"Facebook, Instagram, YouTube",tech:"N/A",score:100,tier:"High"},
+  {name:"Manhattan EastSide Orthodontics",phone:"(212) 289-8989",addr:"207 E 94th St #501, NY 10128",area:"Upper East Side",website:"manhattaneastsideorthodontics.com",wfull:"https://manhattaneastsideorthodontics.com/",rating:5.0,reviews:429,hours:"Mon: 9:00AM-5:00PM",lat:40.7838,lng:-73.9494,services:"N/A",booking:"N/A",insurance:"N/A",social:"N/A",tech:"N/A",score:100,tier:"High"},
+  {name:"Smile Pop - Dr. Courtney Barry",phone:"(646) 770-2091",addr:"76 Madison Ave, NY 10016",area:"Midtown",website:"smilepop.com",wfull:"http://www.smilepop.com/",rating:5.0,reviews:444,hours:"Mon: 10:00AM-4:00PM",lat:40.7440,lng:-73.9861,services:"Cosmetic, Orthodontics",booking:"Yes",insurance:"N/A",social:"YouTube",tech:"N/A",score:100,tier:"High"},
+  {name:"Salzer Orthodontics",phone:"(212) 755-2333",addr:"553 Park Ave, NY 10065",area:"Upper East Side",website:"lsortho.com",wfull:"https://lsortho.com/",rating:5.0,reviews:177,hours:"Mon: 9:00AM-6:00PM",lat:40.7645,lng:-73.9683,services:"Orthodontics",booking:"N/A",insurance:"N/A",social:"Facebook, Instagram, LinkedIn, YouTube, TikTok",tech:"N/A",score:96,tier:"High"},
+  {name:"Jackson Heights Orthodontics",phone:"(718) 335-4444",addr:"37-43 77th St, Jackson Heights, NY 11372",area:"Jackson Heights",website:"jhoortho.com",wfull:"http://jhoortho.com/",rating:4.8,reviews:1337,hours:"Mon: 9:00AM-5:00PM",lat:40.7480,lng:-73.8886,services:"Cosmetic, Orthodontics",booking:"Yes",insurance:"N/A",social:"Facebook, Instagram",tech:"Teledentistry",score:100,tier:"High"},
+  {name:"Wall Street Orthodontics",phone:"(212) 871-9835",addr:"111 Broadway APT 1707, NY 10006",area:"Financial District",website:"wallstreetortho.com",wfull:"http://wallstreetortho.com/",rating:4.9,reviews:87,hours:"Mon: 9:00AM-5:00PM",lat:40.7087,lng:-74.0115,services:"Orthodontics",booking:"N/A",insurance:"N/A",social:"Facebook, Instagram, YouTube",tech:"Teledentistry, Digital Imaging",score:85,tier:"High"},
+  {name:"Fellow Orthodontist",phone:"(917) 451-2999",addr:"49 E 18th St, NY 10003",area:"East Village",website:"felloworthodontist.com",wfull:"https://felloworthodontist.com/",rating:5.0,reviews:234,hours:"Mon: 10:00AM-5:00PM",lat:40.7376,lng:-73.9892,services:"Cosmetic, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, Twitter/X",tech:"Teledentistry",score:100,tier:"High"},
+  {name:"Straight Set Orthodontics Harlem",phone:"(212) 996-7300",addr:"241 Malcolm X Blvd, NY 10027",area:"Harlem",website:"straightsetortho.com",wfull:"https://www.straightsetortho.com/harlem",rating:4.8,reviews:677,hours:"Mon: 9:00AM-6:00PM",lat:40.8061,lng:-73.9472,services:"Cosmetic, Orthodontics",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram",tech:"Teledentistry",score:100,tier:"High"},
+  {name:"Central Park Orthodontics",phone:"(212) 362-4400",addr:"271A Central Park West, NY 10024",area:"Upper West Side",website:"centralparkorthodontics.com",wfull:"https://www.centralparkorthodontics.com/",rating:4.9,reviews:60,hours:"Mon: 9:00AM-6:00PM",lat:40.7862,lng:-73.9690,services:"Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram",tech:"ZocDoc",score:95,tier:"High"},
+  {name:"Gibbs Orthodontic Associates",phone:"(212) 535-4111",addr:"40 E 84th St, NY 10028",area:"Upper East Side",website:"gibbsortho.com",wfull:"https://www.gibbsortho.com/",rating:4.9,reviews:186,hours:"Mon: 9:00AM-5:00PM",lat:40.7793,lng:-73.9595,services:"General Dentistry, Cosmetic, Orthodontics",booking:"Yes",insurance:"N/A",social:"Facebook, Instagram, Twitter/X, LinkedIn, YouTube, TikTok",tech:"Teledentistry, Digital Imaging",score:100,tier:"High"},
+  {name:"Manhattan Family Orthodontics",phone:"(347) 767-5668",addr:"207 E 63rd St, NY 10022",area:"Midtown East",website:"manhattanfamilyorthodontics.com",wfull:"https://www.manhattanfamilyorthodontics.com/",rating:4.9,reviews:159,hours:"Mon: 1:00-6:00PM",lat:40.7640,lng:-73.9642,services:"General Dentistry, Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram",tech:"ZocDoc, Teledentistry",score:100,tier:"High"},
+  {name:"Lemchen Salzer Orthodontics",phone:"(212) 755-2333",addr:"553 Park Ave, NY 10065",area:"Upper East Side",website:"lsortho.com",wfull:"http://www.lsortho.com/",rating:5.0,reviews:313,hours:"Mon: 9:00AM-6:00PM",lat:40.7645,lng:-73.9683,services:"Orthodontics",booking:"N/A",insurance:"N/A",social:"Facebook, Instagram, LinkedIn, YouTube, TikTok",tech:"N/A",score:100,tier:"High"},
+  {name:"Orthodontics Center of NYC",phone:"(646) 491-7133",addr:"263 West End Ave Fl 1, NY 10023",area:"Upper West Side",website:"orthodonticscenternyc.com",wfull:"https://www.orthodonticscenternyc.com/",rating:4.7,reviews:12,hours:"Mon: 9:00AM-6:00PM",lat:40.7801,lng:-73.9845,services:"Orthodontics",booking:"N/A",insurance:"Accepted",social:"Facebook, Instagram, Twitter/X, LinkedIn",tech:"Teledentistry",score:68,tier:"Medium"},
+  {name:"Mid-Manhattan Oral Surgery",phone:"(212) 918-1859",addr:"36 W 44th St Suite 600, NY 10036",area:"Midtown",website:"midmanhattanoralsurgery.com",wfull:"https://www.midmanhattanoralsurgery.com/",rating:4.9,reviews:895,hours:"Mon: 8:00AM-5:00PM",lat:40.7556,lng:-73.9820,services:"Implants, Oral Surgery",booking:"Yes",insurance:"N/A",social:"N/A",tech:"Digital Imaging",score:100,tier:"High"},
+  {name:"New York Oral & Maxillofacial Surgery",phone:"(646) 681-7068",addr:"800B 5th Ave Ste 1, NY 10065",area:"Upper East Side",website:"new-york-oral-surgery.com",wfull:"https://www.new-york-oral-surgery.com/",rating:4.1,reviews:12,hours:"Mon: 9:00AM-5:00PM",lat:40.7655,lng:-73.9717,services:"N/A",booking:"N/A",insurance:"N/A",social:"N/A",tech:"N/A",score:45,tier:"Medium"},
+  {name:"David A. Koslovsky DDS",phone:"(212) 888-4760",addr:"800B 5th Ave Ste 1, NY 10065",area:"Upper East Side",website:"new-york-oral-surgery.com",wfull:"https://www.new-york-oral-surgery.com/",rating:4.9,reviews:146,hours:"Mon: 9:00AM-5:00PM",lat:40.7655,lng:-73.9717,services:"N/A",booking:"N/A",insurance:"N/A",social:"N/A",tech:"N/A",score:93,tier:"High"},
+  {name:"Dental Oral Surgery Bronx",phone:"(347) 590-9910",addr:"2403 Grand Concourse, Bronx NY 10468",area:"New York",website:"mofsny.com",wfull:"http://www.mofsny.com/",rating:4.0,reviews:583,hours:"Mon: 7:30AM-1:00PM",lat:40.8603,lng:-73.8987,services:"General Dentistry, Implants, Oral Surgery, Prosthodontics",booking:"Yes",insurance:"Accepted",social:"N/A",tech:"Digital Imaging",score:100,tier:"High"},
+  {name:"NYC Dental Implants Center",phone:"(212) 256-0000",addr:"121 E 60th St Ste 6C2, NY 10065",area:"Upper East Side",website:"nycdentalimplantscenter.com",wfull:"https://www.nycdentalimplantscenter.com/",rating:4.9,reviews:200,hours:"Mon: 8:00AM-6:00PM",lat:40.7633,lng:-73.9683,services:"Implants, Periodontics, Oral Surgery, Emergency",booking:"Yes",insurance:"Accepted",social:"Facebook, Instagram, Twitter/X, LinkedIn, YouTube, TikTok",tech:"Digital Imaging",score:100,tier:"High"}
 ];
 
-function stars(r){const n=Math.round(parseFloat(r)||0);return"★".repeat(n)+"☆".repeat(5-n);}
+function stars(r){const n=Math.round(r);return"★".repeat(n)+"☆".repeat(5-n);}
 function scoreColor(s){return s>=70?"#10b981":s>=40?"#f59e0b":"#ef4444";}
-function websiteHtml(w){
-  if(!w||w==="N/A") return `<span class="na">N/A</span>`;
-  const display = w.replace(/https?:\/\//,'').replace(/\?.*/,'').substring(0,22);
-  return `<a href="https://${w.replace(/https?:\/\//,'')}" target="_blank" class="website-link">${display}</a>`;
+function naOrVal(v,cls){return(!v||v==="N/A")?`<span class="td-na">N/A</span>`:`<span class="${cls}">${v}</span>`;}
+function ynBadge(v){
+  if(!v||v==="N/A") return `<span class="td-na">N/A</span>`;
+  if(v==="Yes") return `<span class="badge-yn yn-yes">✓ Yes</span>`;
+  if(v==="Accepted") return `<span class="badge-yn yn-acc">✓ Accepted</span>`;
+  return `<span class="td-na">${v}</span>`;
 }
 
 function updateStats(data){
   document.getElementById("totalCount").textContent=data.length;
   document.getElementById("highCount").textContent=data.filter(d=>d.tier==="High").length;
-  const avg=data.length?(data.reduce((a,d)=>a+d.rating,0)/data.length).toFixed(1):0;
-  document.getElementById("avgRating").textContent=avg;
   document.getElementById("countDisplay").textContent=data.length;
 }
 
@@ -315,17 +336,23 @@ function render(data){
   empty.style.display="none";
   tbody.innerHTML=data.map((d,i)=>{
     const col=scoreColor(d.score);
+    const nameShort=d.name.length>30?d.name.substring(0,30)+"…":d.name;
     return`<tr>
       <td style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;">${i+1}</td>
-      <td class="td-name">${d.name.length>32?d.name.substring(0,32)+"…":d.name}<div class="td-name-sub">${d.area} · New York</div></td>
+      <td><div class="td-name">${nameShort}</div><div class="td-name-sub">${d.area} · NYC</div></td>
       <td class="phone">${d.phone}</td>
-      <td class="td-addr">${d.addr.replace(', USA','')}</td>
-      <td style="font-size:12px;color:var(--text)">${d.area}</td>
-      <td>${websiteHtml(d.website)}</td>
+      <td class="td-addr">${d.addr}</td>
+      <td style="font-size:12px;color:var(--text);white-space:nowrap">${d.area}</td>
+      <td><a href="${d.wfull}" target="_blank" class="website-link">${d.website}</a></td>
       <td><div class="rating-wrap">${d.rating.toFixed(1)}<span class="stars">${stars(d.rating)}</span></div></td>
-      <td class="pop-score">${d.reviews.toLocaleString()}</td>
-      <td class="td-hours">${d.hours}</td>
-      <td class="td-gps">${d.lat.toFixed(4)},<br>${d.lng.toFixed(4)}</td>
+      <td class="reviews">${d.reviews.toLocaleString()}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap">${d.hours}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap">${d.lat.toFixed(4)},<br>${d.lng.toFixed(4)}</td>
+      <td>${naOrVal(d.services,'td-enrich')}</td>
+      <td>${ynBadge(d.booking)}</td>
+      <td>${ynBadge(d.insurance)}</td>
+      <td>${naOrVal(d.social,'td-enrich')}</td>
+      <td>${naOrVal(d.tech,'td-enrich')}</td>
       <td><div class="score-wrap"><span class="score-num" style="color:${col}">${d.score}</span><div class="score-bar"><div class="score-fill" style="width:${d.score}%;background:${col}"></div></div></div></td>
       <td><span class="tier-badge tier-${d.tier}">${d.tier}</span></td>
     </tr>`;
@@ -335,16 +362,22 @@ function render(data){
 function filter(){
   const q=document.getElementById("searchInput").value.toLowerCase();
   const area=document.getElementById("areaFilter").value;
+  const svc=document.getElementById("serviceFilter").value;
+  const bk=document.getElementById("bookingFilter").value;
   const tier=document.getElementById("tierFilter").value;
   render(DATA.filter(d=>
-    (!q||(d.name+d.area+d.addr).toLowerCase().includes(q))&&
+    (!q||(d.name+d.area+d.services+d.tech).toLowerCase().includes(q))&&
     (!area||d.area===area)&&
+    (!svc||d.services.includes(svc))&&
+    (!bk||d.booking===bk)&&
     (!tier||d.tier===tier)
   ));
 }
 
 document.getElementById("searchInput").addEventListener("input",filter);
 document.getElementById("areaFilter").addEventListener("change",filter);
+document.getElementById("serviceFilter").addEventListener("change",filter);
+document.getElementById("bookingFilter").addEventListener("change",filter);
 document.getElementById("tierFilter").addEventListener("change",filter);
 render(DATA);
 </script>
