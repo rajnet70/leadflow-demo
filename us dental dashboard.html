@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadFlow — US Dental Clinic Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--surface:#0c1018;--card:#101520;--border:#1a2535;--accent:#0ea5e9;--accent2:#38bdf8;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--text:#e2e8f0;--muted:#4e6280;--faint:#141c28;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(14,165,233,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,0.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(14,165,233,0.07) 0%,transparent 65%);top:-250px;right:-200px;}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%);bottom:-100px;left:-150px;}
+.sample-banner{position:relative;z-index:10;background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.06));border-bottom:1px solid rgba(245,158,11,0.3);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.5px;}
+.sample-banner strong{color:#fde68a;}
+header{position:sticky;top:0;z-index:100;background:rgba(7,9,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;}
+.logo span{color:var(--accent);}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:-2px;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.refresh-pill{display:flex;align-items:center;gap:6px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:20px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+.sample-pill{display:flex;align-items:center;gap:6px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);padding:5px 12px;border-radius:20px;font-size:11px;color:var(--amber);font-family:'JetBrains Mono',monospace;}
+.hero{position:relative;z-index:1;padding:48px 24px 36px;text-align:center;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.15);padding:4px 14px;border-radius:20px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;font-family:'JetBrains Mono',monospace;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;line-height:0.95;color:#fff;margin-bottom:16px;}
+h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:420px;margin:0 auto 32px;line-height:1.7;}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;max-width:420px;margin-left:auto;margin-right:auto;}
+.stat-grid .pill-wide{grid-column:span 2;}
+.pill{background:var(--card);border:1px solid var(--border);padding:14px 16px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.pill-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:1px;line-height:1;}
+.pill-val span{color:var(--accent);}
+.pill-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.refresh-banner{position:relative;z-index:1;margin:0 16px 24px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(16,185,129,0.05));border:1px solid rgba(14,165,233,0.15);border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.rb-left{display:flex;align-items:center;gap:10px;}
+.rb-icon{font-size:20px;}
+.rb-title{font-size:13px;font-weight:600;color:#fff;}
+.rb-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.rb-next{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:8px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.section{position:relative;z-index:1;padding:0 16px 24px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.section-title span{color:var(--accent);}
+.cities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px;}
+.city-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;transition:all 0.2s;}
+.city-card.active{border-color:var(--accent);background:rgba(14,165,233,0.05);}
+.city-card.coming{opacity:0.6;}
+.city-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.city-name{font-size:13px;font-weight:600;color:#fff;}
+.city-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.badge-live{background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
+.badge-soon{background:rgba(245,158,11,0.12);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.badge-q3{background:rgba(139,92,246,0.12);color:var(--purple);border:1px solid rgba(139,92,246,0.2);}
+.city-stats{display:flex;gap:12px;}
+.cs{display:flex;flex-direction:column;gap:1px;}
+.cs-val{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;line-height:1;}
+.cs-val span{color:var(--accent);}
+.cs-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;}
+.city-refresh{margin-top:8px;font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;}
+.rdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.rdot-green{background:var(--green);}
+.rdot-amber{background:var(--amber);}
+.rdot-purple{background:var(--purple);}
+.controls{position:relative;z-index:1;padding:0 16px 14px;display:flex;flex-direction:column;gap:10px;}
+.search-wrap{position:relative;}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);}
+input[type=text]{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px 10px 36px;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;}
+input[type=text]:focus{border-color:var(--accent);}
+input[type=text]::placeholder{color:var(--muted);}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+select{flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
+select:focus{border-color:var(--accent);}
+.count-badge{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right;padding:0 2px;}
+.count-badge strong{color:var(--accent);}
+.table-wrap{position:relative;z-index:1;padding:0 16px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;min-width:900px;}
+thead tr{background:var(--surface);border-bottom:1px solid var(--border);}
+th{padding:10px 12px;text-align:left;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+tbody tr{border-bottom:1px solid rgba(26,37,53,0.6);transition:background 0.15s;}
+tbody tr:hover{background:var(--faint);}
+td{padding:11px 12px;font-size:12px;vertical-align:middle;}
+.td-name{font-weight:500;color:#fff;max-width:200px;}
+.td-name-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.td-addr{font-size:11px;color:var(--muted);max-width:180px;line-height:1.4;}
+.td-hours{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap;}
+.td-gps{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap;}
+.phone{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);white-space:nowrap;}
+.rating-wrap{display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:12px;}
+.stars{color:var(--amber);font-size:10px;}
+.pop-score{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+.website-link{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-decoration:none;white-space:nowrap;}
+.website-link:hover{color:var(--accent2);}
+.na{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);opacity:0.5;font-style:italic;}
+.score-wrap{display:flex;align-items:center;gap:6px;}
+.score-num{font-family:'Bebas Neue',sans-serif;font-size:18px;min-width:28px;}
+.score-bar{width:40px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.score-fill{height:100%;border-radius:2px;}
+.tier-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.tier-High{background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
+.tier-Medium{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.tier-Low{background:rgba(100,116,139,0.1);color:#64748b;border:1px solid rgba(100,116,139,0.2);}
+.empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:13px;}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:20px 24px;text-align:center;font-size:11px;color:var(--muted);}
+footer strong{color:var(--text);}
+.footer-sample{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);padding:5px 14px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="sample-banner">
+  ⚠ &nbsp;<strong>SAMPLE DATABASE</strong>&nbsp; — 50 records from New York City. &nbsp;|&nbsp; Full database available for any US city on request. &nbsp;|&nbsp; For presentation purposes only.
+</div>
+
+<header>
+  <div>
+    <div class="logo">Lead<span>Flow</span></div>
+    <div class="logo-sub">AI-Powered Business Intelligence Platform</div>
+  </div>
+  <div class="header-right">
+    <div class="refresh-pill"><div class="dot"></div>Live System</div>
+    <div class="sample-pill">⚠ Sample Database</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-tag">🇺🇸 United States · Dental Clinics · AI-Powered</div>
+  <h1>BUSINESS INTELLIGENCE<br><span>LEADS SYSTEM</span></h1>
+  <p class="hero-sub">AI-powered dental clinic intelligence identifying high-potential prospects across US cities — scored, tiered and ready for your sales team.</p>
+  <div class="stat-grid">
+    <div class="pill"><div class="pill-val" id="totalCount">50</div><div class="pill-lbl">Sample Records</div></div>
+    <div class="pill"><div class="pill-val"><span id="highCount">—</span></div><div class="pill-lbl">High Priority</div></div>
+    <div class="pill"><div class="pill-val" id="avgRating">—</div><div class="pill-lbl">Avg Rating</div></div>
+    <div class="pill"><div class="pill-val"><span>10+</span></div><div class="pill-lbl">US Cities Available</div></div>
+    <div class="pill pill-wide"><div class="pill-val"><span>Full</span></div><div class="pill-lbl">✓ Full Verified Database Available Per City — Contact LeadFlow</div></div>
+  </div>
+</section>
+
+<div class="refresh-banner">
+  <div class="rb-left">
+    <div class="rb-icon">🔄</div>
+    <div>
+      <div class="rb-title">Intelligence Updated Monthly</div>
+      <div class="rb-sub">Sample prepared: June 2026 · New York City · Dental Clinics</div>
+    </div>
+  </div>
+  <div class="rb-next">Monthly Refresh Available</div>
+</div>
+
+<div class="section">
+  <div class="section-title">Coverage — <span>Cities & Rollout</span></div>
+  <div class="cities-grid">
+    <div class="city-card active">
+      <div class="city-top"><div class="city-name">New York City</div><div class="city-badge badge-live">● LIVE</div></div>
+      <div class="city-stats">
+        <div class="cs"><div class="cs-val"><span>50</span></div><div class="cs-lbl">This Sample</div></div>
+        <div class="cs"><div class="cs-val">Full</div><div class="cs-lbl">DB Available</div></div>
+      </div>
+      <div class="city-refresh"><div class="rdot rdot-green"></div>Updated June 2026</div>
+    </div>
+    <div class="city-card coming">
+      <div class="city-top"><div class="city-name">Los Angeles</div><div class="city-badge badge-soon">⏳ Coming Soon</div></div>
+      <div class="city-refresh" style="margin-top:0"><div class="rdot rdot-amber"></div>Available on request</div>
+    </div>
+    <div class="city-card coming">
+      <div class="city-top"><div class="city-name">Chicago</div><div class="city-badge badge-soon">⏳ Coming Soon</div></div>
+      <div class="city-refresh" style="margin-top:0"><div class="rdot rdot-amber"></div>Available on request</div>
+    </div>
+    <div class="city-card coming">
+      <div class="city-top"><div class="city-name">Houston & More</div><div class="city-badge badge-q3">◷ On Demand</div></div>
+      <div class="city-refresh" style="margin-top:0"><div class="rdot rdot-purple"></div>Any US city available</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search clinic name, neighbourhood, address...">
+  </div>
+  <div class="filter-row">
+    <select id="areaFilter">
+      <option value="">All Neighbourhoods</option>
+      <option>Midtown</option>
+      <option>Midtown East</option>
+      <option>Financial District</option>
+      <option>Tribeca</option>
+      <option>Upper East Side</option>
+      <option>Upper West Side</option>
+      <option>SoHo</option>
+      <option>Chelsea</option>
+      <option>Harlem</option>
+      <option>Lower East Side</option>
+      <option>East Village</option>
+      <option>Washington Heights</option>
+      <option>Jackson Heights</option>
+    </select>
+    <select id="tierFilter">
+      <option value="">All Tiers</option>
+      <option value="High">High Priority</option>
+      <option value="Medium">Medium Priority</option>
+      <option value="Low">Low Priority</option>
+    </select>
+  </div>
+  <div class="count-badge">Showing <strong id="countDisplay">50</strong> of 50 sample records</div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Clinic Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Neighbourhood</th>
+        <th>Website</th>
+        <th>Rating</th>
+        <th>Reviews</th>
+        <th>Hours</th>
+        <th>GPS</th>
+        <th>Score</th>
+        <th>Priority</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="empty" id="emptyState" style="display:none;">No clinics match your filters</div>
+</div>
+
+<footer>
+  <strong>LeadFlow</strong> · AI-Powered Business Intelligence Platform<br>
+  <div class="footer-sample">⚠ Sample Database · 50 Records · New York City · For Presentation Purposes Only · June 2026</div>
+</footer>
+
+<script>
+const DATA=[
+  {name:"209 NYC Dental",phone:"(212) 355-2290",addr:"209 E 56th St 1st floor, New York, NY 10022",area:"Midtown East",website:"209nycdental.com",rating:4.9,reviews:1830,hours:"Mon: 7:30AM–6:30PM",lat:40.7594,lng:-73.9671,score:100,tier:"High"},
+  {name:"Sky Dental",phone:"(212) 600-1996",addr:"111 Broadway Suite 1304, New York, NY 10006",area:"Financial District",website:"skydentalnyc.com",rating:4.9,reviews:2654,hours:"Mon: 8:00AM–6:00PM",lat:40.7087,lng:-74.0115,score:100,tier:"High"},
+  {name:"Pearl Dental NYC",phone:"(212) 344-9317",addr:"233 Broadway Suite 1801, New York, NY 10279",area:"Financial District",website:"pearldentalnyc.com",rating:5.0,reviews:475,hours:"Mon: 8:00AM–5:00PM",lat:40.7124,lng:-74.0079,score:100,tier:"High"},
+  {name:"Midtown Dental Care Associates",phone:"(212) 685-4730",addr:"12 E 41st St Ste 1100, New York, NY 10017",area:"Midtown",website:"midtowndentalcareassociates.com",rating:4.9,reviews:573,hours:"Mon: 8:00AM–7:00PM",lat:40.7524,lng:-73.9807,score:100,tier:"High"},
+  {name:"Expert Dental Midtown",phone:"(212) 763-3383",addr:"110 E 40th St #104, New York, NY 10016",area:"Midtown",website:"expertdentalnyc.com",rating:4.5,reviews:2156,hours:"Mon: 9:00AM–7:00PM",lat:40.7504,lng:-73.9780,score:100,tier:"High"},
+  {name:"New York Dental Office",phone:"(212) 548-3261",addr:"245 E 63rd St #110, New York, NY 10065",area:"Upper East Side",website:"newyorkdentaloffice.com",rating:4.9,reviews:469,hours:"Mon: 8:30AM–5:00PM",lat:40.7633,lng:-73.9627,score:100,tier:"High"},
+  {name:"NYC Smile Spa",phone:"(646) 374-2242",addr:"30 E 60th St Ste 1201, New York, NY 10022",area:"Midtown East",website:"nycsmilespa.com",rating:4.9,reviews:395,hours:"Mon: 8:00AM–6:00PM",lat:40.7637,lng:-73.9702,score:100,tier:"High"},
+  {name:"Studio Smiles NYC",phone:"(646) 470-1376",addr:"41 Park Ave #1C, New York, NY 10016",area:"Midtown",website:"studiosmilesnyc.com",rating:4.9,reviews:611,hours:"Mon: 8:00AM–6:00PM",lat:40.7484,lng:-73.9800,score:100,tier:"High"},
+  {name:"212 Dental Care",phone:"(888) 506-9583",addr:"286 Madison Ave 10th Floor, New York, NY 10017",area:"Midtown",website:"212dentalcare.com",rating:4.7,reviews:3285,hours:"Mon: 8:00AM–8:00PM",lat:40.7517,lng:-73.9803,score:100,tier:"High"},
+  {name:"Lumia Dental PLLC",phone:"(212) 287-1275",addr:"160 Broadway #1004, New York, NY 10038",area:"Financial District",website:"lumiadental.com",rating:4.9,reviews:768,hours:"Mon: 8:00AM–6:00PM",lat:40.7094,lng:-74.0100,score:100,tier:"High"},
+  {name:"172 NYC Dental",phone:"(646) 921-5541",addr:"172 Madison Ave, New York, NY 10016",area:"Midtown",website:"172nycdental.com",rating:4.8,reviews:260,hours:"Mon: 7:30AM–6:30PM",lat:40.7474,lng:-73.9836,score:100,tier:"High"},
+  {name:"Midtown Dental Group Fashion District",phone:"(212) 730-4440",addr:"241 W 37th St Ground Floor, New York, NY 10018",area:"Midtown",website:"midtowndentalgroup.com",rating:4.9,reviews:734,hours:"Mon: 9:00AM–5:45PM",lat:40.7539,lng:-73.9909,score:100,tier:"High"},
+  {name:"ORAL Dental Studio NYC",phone:"(646) 663-7633",addr:"131 Essex St Fl 2, New York, NY 10002",area:"Lower East Side",website:"oraldentalstudio.com",rating:4.9,reviews:457,hours:"Mon: 9:00AM–6:00PM",lat:40.7200,lng:-73.9876,score:100,tier:"High"},
+  {name:"Esthetix Dentist NYC",phone:"(212) 795-9675",addr:"285 Fort Washington Ave, New York, NY 10032",area:"Washington Heights",website:"esthetixdentalspa.com",rating:4.8,reviews:1187,hours:"Mon: 8:00AM–8:00PM",lat:40.8450,lng:-73.9408,score:100,tier:"High"},
+  {name:"Tribeca Dental Care",phone:"(212) 431-4582",addr:"402 Broadway, New York, NY 10013",area:"Tribeca",website:"tribecanydentistoffice.com",rating:4.8,reviews:1153,hours:"Mon: 10:00AM–6:30PM",lat:40.7187,lng:-74.0022,score:100,tier:"High"},
+  {name:"Maiden Lane Dental",phone:"(212) 509-4585",addr:"80 Maiden Ln #702, New York, NY 10038",area:"Financial District",website:"maidenlanedental.com",rating:4.9,reviews:507,hours:"Mon: 8:00AM–6:00PM",lat:40.7071,lng:-74.0078,score:100,tier:"High"},
+  {name:"Preferred Dental Care Chelsea",phone:"(212) 594-7171",addr:"135 W 27th St, New York, NY 10001",area:"Chelsea",website:"preferreddentalcare.com",rating:4.9,reviews:2341,hours:"Mon: 7:00AM–9:00PM",lat:40.7463,lng:-73.9924,score:100,tier:"High"},
+  {name:"PDA Dental",phone:"(212) 256-9583",addr:"150 Broadway #1310, New York, NY 10038",area:"Financial District",website:"pdadental.com",rating:4.7,reviews:730,hours:"Mon: 8:00AM–6:00PM",lat:40.7092,lng:-74.0101,score:100,tier:"High"},
+  {name:"TriBeCa Dental Associates",phone:"(212) 671-3749",addr:"21 Murray St 4th floor, New York, NY 10007",area:"Tribeca",website:"tribeca.dental",rating:4.9,reviews:1501,hours:"Mon: 8:00AM–4:00PM",lat:40.7138,lng:-74.0082,score:100,tier:"High"},
+  {name:"Park Smiles NYC",phone:"(212) 988-6724",addr:"1175 Park Ave #1d, New York, NY 10128",area:"Upper East Side",website:"parksmilesnyc.com",rating:4.8,reviews:546,hours:"Mon: 7:45AM–5:00PM",lat:40.7844,lng:-73.9538,score:100,tier:"High"},
+  {name:"Sachar Dental NYC",phone:"(212) 752-1163",addr:"20 E 46th St Rm 1301, New York, NY 10017",area:"Midtown",website:"sachardental.com",rating:5.0,reviews:414,hours:"Mon: 8:00AM–6:00PM",lat:40.7555,lng:-73.9779,score:100,tier:"High"},
+  {name:"New York General Dentistry",phone:"(212) 838-0842",addr:"133 E 58th St Ste 409, New York, NY 10022",area:"Midtown East",website:"newyorkgeneraldentistry.com",rating:5.0,reviews:371,hours:"Mon: 8:30AM–5:30PM",lat:40.7620,lng:-73.9689,score:100,tier:"High"},
+  {name:"Les Belles NYC Dentistry",phone:"(212) 804-8884",addr:"110 E 60th St #902, New York, NY 10022",area:"Midtown East",website:"lesbellesnyc.com",rating:4.9,reviews:672,hours:"Mon: 7:00AM–8:00PM",lat:40.7631,lng:-73.9688,score:100,tier:"High"},
+  {name:"The Exchange Dental Group",phone:"(646) 780-5410",addr:"39 Broadway Rm 2115, New York, NY 10006",area:"Financial District",website:"theexchangedentalgroup.com",rating:4.9,reviews:1249,hours:"Mon: 8:00AM–7:00PM",lat:40.7063,lng:-74.0133,score:100,tier:"High"},
+  {name:"Manhattan Dental Spa",phone:"(212) 683-2530",addr:"200 Madison Ave Ste 2201, New York, NY 10016",area:"Midtown",website:"manhattandentalspa.com",rating:4.9,reviews:728,hours:"Mon: 9:00AM–7:00PM",lat:40.7487,lng:-73.9825,score:100,tier:"High"},
+  {name:"Smile Arts of NY",phone:"(212) 537-6923",addr:"30 E 40th St #105, New York, NY 10016",area:"Midtown",website:"smileartsofny.com",rating:4.8,reviews:797,hours:"Mon: 8:00AM–7:30PM",lat:40.7512,lng:-73.9796,score:100,tier:"High"},
+  {name:"SoHo Dental Group NYC",phone:"(212) 878-7646",addr:"552 Broadway #505, New York, NY 10012",area:"SoHo",website:"sohodentalgroup.com",rating:4.8,reviews:540,hours:"Mon: 9:00AM–6:00PM",lat:40.7237,lng:-73.9980,score:100,tier:"High"},
+  {name:"Diamond District Dental NYC",phone:"(212) 759-5595",addr:"10 W 46th St #1401, New York, NY 10036",area:"Midtown",website:"dddentalnyc.com",rating:4.9,reviews:595,hours:"Mon: 9:00AM–6:00PM",lat:40.7563,lng:-73.9800,score:100,tier:"High"},
+  {name:"Manhattan Bridge Orthodontics",phone:"(212) 274-0477",addr:"77 Bowery 6th Floor, New York, NY 10002",area:"Lower East Side",website:"manhattanbridgeortho.com",rating:4.9,reviews:1514,hours:"Mon: 10:00AM–7:00PM",lat:40.7167,lng:-73.9955,score:100,tier:"High"},
+  {name:"iSmile Orthodontics NYC",phone:"(646) 863-2181",addr:"4779 Broadway, New York, NY 10034",area:"Washington Heights",website:"ismileorthodontics.com",rating:4.9,reviews:1006,hours:"Mon: 9:00AM–6:00PM",lat:40.8660,lng:-73.9266,score:100,tier:"High"},
+  {name:"Manhattan EastSide Orthodontics",phone:"(212) 289-8989",addr:"207 E 94th St #501, New York, NY 10128",area:"Upper East Side",website:"manhattaneastsideorthodontics.com",rating:5.0,reviews:429,hours:"Mon: 9:00AM–5:00PM",lat:40.7838,lng:-73.9494,score:100,tier:"High"},
+  {name:"Bronsky Orthodontics",phone:"(212) 758-0040",addr:"530 Park Ave APT 1G, New York, NY 10065",area:"Upper East Side",website:"bronskyorthodontics.com",rating:5.0,reviews:481,hours:"Mon: 8:00AM–5:00PM",lat:40.7641,lng:-73.9695,score:100,tier:"High"},
+  {name:"Smile Pop Orthodontist",phone:"(646) 770-2091",addr:"76 Madison Ave, New York, NY 10016",area:"Midtown",website:"smilepop.com",rating:5.0,reviews:444,hours:"Mon: 10:00AM–4:00PM",lat:40.7440,lng:-73.9861,score:100,tier:"High"},
+  {name:"Brite Orthodontics Harlem",phone:"(212) 866-9800",addr:"1851 Adam Clayton Powell Jr Blvd, New York, NY 10026",area:"Harlem",website:"briteorthodontics.com",rating:4.9,reviews:673,hours:"Mon: 9:00AM–5:00PM",lat:40.8009,lng:-73.9537,score:100,tier:"High"},
+  {name:"Fellow Orthodontist",phone:"(917) 451-2999",addr:"49 E 18th St, New York, NY 10003",area:"East Village",website:"felloworthodontist.com",rating:5.0,reviews:234,hours:"Mon: 10:00AM–5:00PM",lat:40.7376,lng:-73.9892,score:100,tier:"High"},
+  {name:"Goodman Orthodontics",phone:"(212) 688-4663",addr:"440 E 57th St B, New York, NY 10022",area:"Midtown East",website:"goodortho.com",rating:5.0,reviews:275,hours:"Mon: 8:00AM–4:00PM",lat:40.7575,lng:-73.9616,score:100,tier:"High"},
+  {name:"Straight Set Orthodontics Harlem",phone:"(212) 996-7300",addr:"241 Malcolm X Blvd, New York, NY 10027",area:"Harlem",website:"straightsetortho.com",rating:4.8,reviews:677,hours:"Mon: 9:00AM–6:00PM",lat:40.8061,lng:-73.9472,score:100,tier:"High"},
+  {name:"Bronsky Orthodontics Tribeca",phone:"(212) 758-0040",addr:"15 Harrison St Ground Floor, New York, NY 10013",area:"Tribeca",website:"bronskyorthodontics.com",rating:5.0,reviews:271,hours:"Mon: 8:00AM–5:00PM",lat:40.7186,lng:-74.0099,score:100,tier:"High"},
+  {name:"Upper Eastside Orthodontists",phone:"(212) 360-0835",addr:"153 E 87th St APT 1B, New York, NY 10128",area:"Upper East Side",website:"ueso.org",rating:4.9,reviews:476,hours:"Mon: Closed",lat:40.7802,lng:-73.9546,score:93,tier:"High"},
+  {name:"Jackson Heights Orthodontics",phone:"(718) 335-4444",addr:"37-43 77th St, Jackson Heights, NY 11372",area:"Jackson Heights",website:"jhoortho.com",rating:4.8,reviews:1337,hours:"Mon: 9:00AM–5:00PM",lat:40.7480,lng:-73.8886,score:100,tier:"High"},
+  {name:"Gramercy Orthodontics",phone:"(212) 777-9177",addr:"200 E 15th St STE PRB, New York, NY 10003",area:"East Village",website:"gramercyorthonyc.com",rating:5.0,reviews:161,hours:"Mon: 10:00AM–7:00PM",lat:40.7338,lng:-73.9865,score:93,tier:"High"},
+  {name:"House of Orthodontia Manhattan",phone:"(212) 392-4789",addr:"601 E 12th St, New York, NY 10009",area:"East Village",website:"houseoforthodontia.com",rating:4.9,reviews:101,hours:"Mon: Closed",lat:40.7282,lng:-73.9788,score:80,tier:"High"},
+  {name:"Gibbs Orthodontic Associates",phone:"(212) 535-4111",addr:"40 E 84th St, New York, NY 10028",area:"Upper East Side",website:"gibbsortho.com",rating:4.9,reviews:186,hours:"Mon: 9:00AM–5:00PM",lat:40.7793,lng:-73.9595,score:93,tier:"High"},
+  {name:"Manhattan Family Orthodontics",phone:"(347) 767-5668",addr:"207 E 63rd St, New York, NY 10022",area:"Midtown East",website:"manhattanfamilyorthodontics.com",rating:4.9,reviews:159,hours:"Mon: 1:00PM–6:00PM",lat:40.7640,lng:-73.9642,score:93,tier:"High"},
+  {name:"Salzer Orthodontics",phone:"(212) 755-2333",addr:"553 Park Ave, New York, NY 10065",area:"Upper East Side",website:"lsortho.com",rating:5.0,reviews:177,hours:"Mon: 9:00AM–6:00PM",lat:40.7645,lng:-73.9683,score:93,tier:"High"},
+  {name:"Central Park West Orthodontics",phone:"(917) 336-8548",addr:"327 Central Park W #1a, New York, NY 10025",area:"Upper West Side",website:"cpworthodontic.com",rating:4.9,reviews:135,hours:"Mon: 10:00AM–5:00PM",lat:40.7897,lng:-73.9665,score:93,tier:"High"},
+  {name:"Wall Street Orthodontics",phone:"(212) 871-9835",addr:"111 Broadway APT 1707, New York, NY 10006",area:"Financial District",website:"wallstreetortho.com",rating:4.9,reviews:87,hours:"Mon: 9:00AM–5:00PM",lat:40.7087,lng:-74.0115,score:77,tier:"High"},
+  {name:"NYC Orthodontics",phone:"(212) 245-5121",addr:"30 Central Park S RM 2A, New York, NY 10019",area:"Midtown",website:"orthonyc.com",rating:5.0,reviews:54,hours:"Mon: 12:00PM–6:30PM",lat:40.7650,lng:-73.9751,score:77,tier:"High"},
+  {name:"NYC Dental Center",phone:"(646) 861-3070",addr:"216 E 39th St #1, New York, NY 10016",area:"Midtown",website:"nyc-dental-center.com",rating:4.4,reviews:255,hours:"Mon: 10:00AM–6:00PM",lat:40.7484,lng:-73.9752,score:80,tier:"High"},
+  {name:"New York University College of Dentistry",phone:"(212) 998-9800",addr:"345 E 24th St, New York, NY 10010",area:"Gramercy",website:"dental.nyu.edu",rating:3.6,reviews:1228,hours:"Mon: 8:00AM–8:00PM",lat:40.7378,lng:-73.9784,score:63,tier:"Medium"},
+];
+
+function stars(r){const n=Math.round(parseFloat(r)||0);return"★".repeat(n)+"☆".repeat(5-n);}
+function scoreColor(s){return s>=70?"#10b981":s>=40?"#f59e0b":"#ef4444";}
+function websiteHtml(w){
+  if(!w||w==="N/A") return `<span class="na">N/A</span>`;
+  const display = w.replace(/https?:\/\//,'').replace(/\?.*/,'').substring(0,22);
+  return `<a href="https://${w.replace(/https?:\/\//,'')}" target="_blank" class="website-link">${display}</a>`;
+}
+
+function updateStats(data){
+  document.getElementById("totalCount").textContent=data.length;
+  document.getElementById("highCount").textContent=data.filter(d=>d.tier==="High").length;
+  const avg=data.length?(data.reduce((a,d)=>a+d.rating,0)/data.length).toFixed(1):0;
+  document.getElementById("avgRating").textContent=avg;
+  document.getElementById("countDisplay").textContent=data.length;
+}
+
+function render(data){
+  const tbody=document.getElementById("tableBody");
+  const empty=document.getElementById("emptyState");
+  updateStats(data);
+  if(!data.length){tbody.innerHTML="";empty.style.display="block";return;}
+  empty.style.display="none";
+  tbody.innerHTML=data.map((d,i)=>{
+    const col=scoreColor(d.score);
+    return`<tr>
+      <td style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;">${i+1}</td>
+      <td class="td-name">${d.name.length>32?d.name.substring(0,32)+"…":d.name}<div class="td-name-sub">${d.area} · New York</div></td>
+      <td class="phone">${d.phone}</td>
+      <td class="td-addr">${d.addr.replace(', USA','')}</td>
+      <td style="font-size:12px;color:var(--text)">${d.area}</td>
+      <td>${websiteHtml(d.website)}</td>
+      <td><div class="rating-wrap">${d.rating.toFixed(1)}<span class="stars">${stars(d.rating)}</span></div></td>
+      <td class="pop-score">${d.reviews.toLocaleString()}</td>
+      <td class="td-hours">${d.hours}</td>
+      <td class="td-gps">${d.lat.toFixed(4)},<br>${d.lng.toFixed(4)}</td>
+      <td><div class="score-wrap"><span class="score-num" style="color:${col}">${d.score}</span><div class="score-bar"><div class="score-fill" style="width:${d.score}%;background:${col}"></div></div></div></td>
+      <td><span class="tier-badge tier-${d.tier}">${d.tier}</span></td>
+    </tr>`;
+  }).join("");
+}
+
+function filter(){
+  const q=document.getElementById("searchInput").value.toLowerCase();
+  const area=document.getElementById("areaFilter").value;
+  const tier=document.getElementById("tierFilter").value;
+  render(DATA.filter(d=>
+    (!q||(d.name+d.area+d.addr).toLowerCase().includes(q))&&
+    (!area||d.area===area)&&
+    (!tier||d.tier===tier)
+  ));
+}
+
+document.getElementById("searchInput").addEventListener("input",filter);
+document.getElementById("areaFilter").addEventListener("change",filter);
+document.getElementById("tierFilter").addEventListener("change",filter);
+render(DATA);
+</script>
+</body>
+</html>
