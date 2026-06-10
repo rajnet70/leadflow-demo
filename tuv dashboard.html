@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadFlow — Business Intelligence Leads System</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--surface:#0c1018;--card:#101520;--border:#1a2535;--accent:#0ea5e9;--accent2:#38bdf8;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--text:#e2e8f0;--muted:#4e6280;--faint:#141c28;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(14,165,233,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,0.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(14,165,233,0.07) 0%,transparent 65%);top:-250px;right:-200px;}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%);bottom:-100px;left:-150px;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:rgba(7,9,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;}
+.logo span{color:var(--accent);}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:-2px;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.refresh-pill{display:flex;align-items:center;gap:6px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:20px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+.sample-pill{display:flex;align-items:center;gap:6px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);padding:5px 12px;border-radius:20px;font-size:11px;color:var(--amber);font-family:'JetBrains Mono',monospace;}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:48px 24px 36px;text-align:center;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.15);padding:4px 14px;border-radius:20px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;font-family:'JetBrains Mono',monospace;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;line-height:0.95;color:#fff;margin-bottom:16px;}
+h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:420px;margin:0 auto 32px;line-height:1.7;}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;max-width:420px;margin-left:auto;margin-right:auto;}
+.stat-grid .pill-wide{grid-column:span 2;}
+.pill{background:var(--card);border:1px solid var(--border);padding:14px 16px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.pill-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:1px;line-height:1;}
+.pill-val span{color:var(--accent);}
+.pill-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+/* REFRESH BANNER */
+.refresh-banner{position:relative;z-index:1;margin:0 16px 24px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(16,185,129,0.05));border:1px solid rgba(14,165,233,0.15);border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.rb-left{display:flex;align-items:center;gap:10px;}
+.rb-icon{font-size:20px;}
+.rb-title{font-size:13px;font-weight:600;color:#fff;}
+.rb-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.rb-next{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:8px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+
+/* ENRICHMENT NOTE */
+.enrich-note{position:relative;z-index:1;margin:0 16px 20px;background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:11px;color:#c4b5fd;font-family:'JetBrains Mono',monospace;}
+.enrich-note strong{color:#ddd6fe;}
+
+/* COVERAGE */
+.section{position:relative;z-index:1;padding:0 16px 24px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.section-title span{color:var(--accent);}
+.cities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px;}
+.city-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;transition:all 0.2s;}
+.city-card.active{border-color:var(--accent);background:rgba(14,165,233,0.05);}
+.city-card.coming{opacity:0.6;}
+.city-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.city-name{font-size:13px;font-weight:600;color:#fff;}
+.city-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.badge-live{background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
+.badge-soon{background:rgba(245,158,11,0.12);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.badge-q3{background:rgba(139,92,246,0.12);color:var(--purple);border:1px solid rgba(139,92,246,0.2);}
+.city-stats{display:flex;gap:12px;}
+.cs{display:flex;flex-direction:column;gap:1px;}
+.cs-val{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;line-height:1;}
+.cs-val span{color:var(--accent);}
+.cs-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;}
+.city-refresh{margin-top:8px;font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;}
+.rdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.rdot-green{background:var(--green);}
+.rdot-amber{background:var(--amber);}
+.rdot-purple{background:var(--purple);}
+
+/* CONTROLS */
+.controls{position:relative;z-index:1;padding:0 16px 14px;display:flex;flex-direction:column;gap:10px;}
+.search-wrap{position:relative;}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);}
+input[type=text]{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px 10px 36px;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;}
+input[type=text]:focus{border-color:var(--accent);}
+input[type=text]::placeholder{color:var(--muted);}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+select{flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
+select:focus{border-color:var(--accent);}
+.count-badge{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right;padding:0 2px;}
+.count-badge strong{color:var(--accent);}
+
+/* TABLE */
+.table-wrap{position:relative;z-index:1;padding:0 16px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;min-width:1100px;}
+thead tr{background:var(--surface);border-bottom:1px solid var(--border);}
+th{padding:10px 12px;text-align:left;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+th.enriched{color:var(--purple);opacity:0.8;}
+tbody tr{border-bottom:1px solid rgba(26,37,53,0.6);transition:background 0.15s;}
+tbody tr:hover{background:var(--faint);}
+td{padding:11px 12px;font-size:12px;vertical-align:middle;}
+
+.td-name{font-weight:500;color:#fff;max-width:200px;}
+.td-name-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.td-addr{font-size:11px;color:var(--muted);max-width:160px;line-height:1.4;}
+.td-gps{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap;}
+
+.ind-tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:600;white-space:nowrap;}
+.ind-food{background:rgba(16,185,129,0.12);color:#6ee7b7;}
+.ind-pharma{background:rgba(14,165,233,0.12);color:#7dd3fc;}
+.ind-textile{background:rgba(139,92,246,0.12);color:#c4b5fd;}
+.ind-chemical{background:rgba(249,115,22,0.12);color:#fdba74;}
+.ind-auto{background:rgba(236,72,153,0.12);color:#f9a8d4;}
+.ind-other{background:rgba(100,116,139,0.12);color:#94a3b8;}
+
+.phone{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);white-space:nowrap;}
+.rating-wrap{display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:12px;}
+.stars{color:var(--amber);font-size:10px;}
+.pop-score{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+
+.cert-wrap{display:flex;gap:3px;flex-wrap:wrap;max-width:140px;}
+.cert-chip{font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 5px;border-radius:4px;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.2);color:var(--accent2);white-space:nowrap;}
+
+.website-link{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);white-space:nowrap;}
+
+/* N/A styling */
+.na{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);opacity:0.5;font-style:italic;}
+
+.exp-yes{color:var(--green);font-family:'JetBrains Mono',monospace;font-size:11px;}
+.exp-no{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;}
+
+.score-wrap{display:flex;align-items:center;gap:6px;}
+.score-num{font-family:'Bebas Neue',sans-serif;font-size:18px;min-width:28px;}
+.score-bar{width:40px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.score-fill{height:100%;border-radius:2px;}
+
+.tier-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.tier-High{background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
+.tier-Medium{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.tier-Low{background:rgba(100,116,139,0.1);color:#64748b;border:1px solid rgba(100,116,139,0.2);}
+
+.empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:13px;}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:20px 24px;text-align:center;font-size:11px;color:var(--muted);}
+footer strong{color:var(--text);}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<header>
+  <div>
+    <div class="logo">Lead<span>Flow</span></div>
+    <div class="logo-sub">AI-Powered Business Intelligence Platform</div>
+  </div>
+  <div class="header-right">
+    <div class="refresh-pill"><div class="dot"></div>Live System</div>
+    <div class="sample-pill">⚠ Sample Demo</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-tag">🇵🇰 Pakistan · Multi-Industry · AI-Powered</div>
+  <h1>BUSINESS INTELLIGENCE<br><span>LEADS SYSTEM</span></h1>
+  <p class="hero-sub">AI-powered market intelligence identifying high-potential prospects — scored, tiered and ready for your sales team.</p>
+  <div class="stat-grid">
+    <div class="pill"><div class="pill-val" id="totalCount">25</div><div class="pill-lbl">Companies</div></div>
+    <div class="pill"><div class="pill-val"><span id="highCount">—</span></div><div class="pill-lbl">High Priority</div></div>
+    <div class="pill"><div class="pill-val" id="avgScore">—</div><div class="pill-lbl">Avg Score</div></div>
+    <div class="pill"><div class="pill-val"><span>5</span></div><div class="pill-lbl">Industries</div></div>
+    <div class="pill pill-wide"><div class="pill-val"><span>75</span>%+</div><div class="pill-lbl">Compliance Signal Detection Rate</div></div>
+  </div>
+</section>
+
+<div class="refresh-banner">
+  <div class="rb-left">
+    <div class="rb-icon">🔄</div>
+    <div>
+      <div class="rb-title">Intelligence Updated Monthly</div>
+      <div class="rb-sub">Last update: 1 May 2026 · Lahore · Food Manufacturing</div>
+    </div>
+  </div>
+  <div class="rb-next">Next refresh: 1 June 2026</div>
+</div>
+
+<div class="enrich-note">
+  <span>🔬</span>
+  <span><strong>AI Enrichment Layer —</strong> Fields marked with * are sourced via AI website analysis. Where a company website is unavailable or insufficient, these fields will show <em>N/A</em>. Base fields (phone, address, rating, GPS) are always available.</span>
+</div>
+
+<div class="section">
+  <div class="section-title">Coverage — <span>Industries & Rollout</span></div>
+  <div class="cities-grid">
+    <div class="city-card active">
+      <div class="city-top"><div class="city-name">Food Manufacturing</div><div class="city-badge badge-live">● LIVE</div></div>
+      <div class="city-stats">
+        <div class="cs"><div class="cs-val"><span>25</span></div><div class="cs-lbl">Companies</div></div>
+        <div class="cs"><div class="cs-val">10</div><div class="cs-lbl">High Priority</div></div>
+      </div>
+      <div class="city-refresh"><div class="rdot rdot-green"></div>Lahore · Updated May 2026</div>
+    </div>
+    <div class="city-card coming">
+      <div class="city-top"><div class="city-name">Pharma</div><div class="city-badge badge-soon">⏳ Coming Soon</div></div>
+      <div class="city-stats">
+        <div class="cs"><div class="cs-val">~200</div><div class="cs-lbl">Est. Companies</div></div>
+        <div class="cs"><div class="cs-val">3</div><div class="cs-lbl">Cities</div></div>
+      </div>
+      <div class="city-refresh"><div class="rdot rdot-amber"></div>Launching June 2026</div>
+    </div>
+    <div class="city-card coming">
+      <div class="city-top"><div class="city-name">Textile</div><div class="city-badge badge-soon">⏳ Coming Soon</div></div>
+      <div class="city-stats">
+        <div class="cs"><div class="cs-val">~350</div><div class="cs-lbl">Est. Companies</div></div>
+        <div class="cs"><div class="cs-val">4</div><div class="cs-lbl">Cities</div></div>
+      </div>
+      <div class="city-refresh"><div class="rdot rdot-amber"></div>Launching June 2026</div>
+    </div>
+    <div class="city-card coming">
+      <div class="city-top"><div class="city-name">Chemical & Automotive</div><div class="city-badge badge-q3">◷ Q3 2026</div></div>
+      <div class="city-stats">
+        <div class="cs"><div class="cs-val">~500</div><div class="cs-lbl">Est. Companies</div></div>
+        <div class="cs"><div class="cs-val">5+</div><div class="cs-lbl">Cities</div></div>
+      </div>
+      <div class="city-refresh"><div class="rdot rdot-purple"></div>Roadmap Q3 2026</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search company, area, address...">
+  </div>
+  <div class="filter-row">
+    <select id="industryFilter">
+      <option value="">All Industries</option>
+      <option>Food Manufacturing</option>
+      <option>Pharma</option>
+      <option>Textile</option>
+      <option>Chemical</option>
+      <option>Automotive</option>
+    </select>
+    <select id="tierFilter">
+      <option value="">All Tiers</option>
+      <option value="High">High Priority</option>
+      <option value="Medium">Medium Priority</option>
+      <option value="Low">Low Priority</option>
+    </select>
+    <select id="exportFilter">
+      <option value="">All Companies</option>
+      <option value="Yes">Exporters Only</option>
+      <option value="No">Domestic Only</option>
+      <option value="N/A">Export Unknown</option>
+    </select>
+  </div>
+  <div class="count-badge">Showing <strong id="countDisplay">25</strong> companies</div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Company</th>
+        <th>Industry</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Area</th>
+        <th>Website *</th>
+        <th>Rating</th>
+        <th>Popularity</th>
+        <th>GPS</th>
+        <th class="enriched">Cert Signals *</th>
+        <th class="enriched">Export *</th>
+        <th>Score</th>
+        <th>Priority</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="empty" id="emptyState" style="display:none;">No companies match your filters</div>
+</div>
+
+<footer>
+  <strong>LeadFlow</strong> · AI-Powered Business Intelligence Platform<br>
+  <span style="margin-top:4px;display:block;">⚠ Sample Demo · For Presentation Purposes Only · Lahore · May 2026</span><br>
+  <span style="margin-top:4px;display:block;font-size:10px;color:var(--muted)">* Fields marked with asterisk are AI-enriched via website analysis and may show N/A where data is unavailable.</span>
+</footer>
+
+<script>
+const DATA=[
+  {name:"Rafhan Maize Products Co. Ltd",industry:"Food Manufacturing",phone:"042-35761000",addr:"Main Kot Lakhpat Industrial Area, Lahore",area:"Kot Lakhpat",website:"rafhan.com.pk",rating:4.6,pop:312,lat:31.5120,lng:74.2980,certs:["ISO 9001","ISO 22000","HACCP"],export:"Yes",score:95,tier:"High"},
+  {name:"Shezan International Ltd",industry:"Food Manufacturing",phone:"042-35960000",addr:"4-Km, Sundar Industrial Estate, Lahore",area:"Gulberg",website:"shezan.com",rating:4.5,pop:287,lat:31.5204,lng:74.3120,certs:["ISO 9001","Halal"],export:"Yes",score:88,tier:"High"},
+  {name:"Noon Pakistan Ltd",industry:"Food Manufacturing",phone:"042-35761200",addr:"Sundar Industrial Estate, Raiwind Road",area:"Sundar Estate",website:"N/A",rating:4.4,pop:198,lat:31.4890,lng:74.3450,certs:["ISO 22000","GMP"],export:"Yes",score:84,tier:"High"},
+  {name:"Mitchell's Fruit Farms Ltd",industry:"Food Manufacturing",phone:"042-36367000",addr:"17-KM, Ferozepur Road, Lahore",area:"Ferozepur Road",website:"mitchells.com.pk",rating:4.5,pop:245,lat:31.4756,lng:74.2890,certs:["ISO 9001","HACCP"],export:"Yes",score:83,tier:"High"},
+  {name:"Packages Limited",industry:"Food Manufacturing",phone:"042-35811000",addr:"Shahrah-e-Roomi, Kot Lakhpat, Lahore",area:"Kot Lakhpat",website:"packages.com.pk",rating:4.3,pop:421,lat:31.5089,lng:74.2934,certs:["ISO 9001","ISO 14001"],export:"Yes",score:81,tier:"High"},
+  {name:"National Foods Ltd",industry:"Food Manufacturing",phone:"042-35302000",addr:"12/CL-6, Sector 24, Korangi Industrial Area",area:"Gulberg III",website:"nationalfoods.com",rating:4.4,pop:356,lat:31.5234,lng:74.3567,certs:["ISO 22000","Halal"],export:"Yes",score:80,tier:"High"},
+  {name:"Haleeb Foods Ltd",industry:"Food Manufacturing",phone:"042-35761500",addr:"135-Km, Raiwind Road, Lahore",area:"Raiwind Road",website:"haleebfoods.com",rating:4.3,pop:289,lat:31.4234,lng:74.4123,certs:["ISO 9001","FSSC 22000"],export:"No",score:76,tier:"High"},
+  {name:"Hilal Confectionery",industry:"Food Manufacturing",phone:"042-35880000",addr:"DHA Phase 5, Main Boulevard, Lahore",area:"DHA Phase 5",website:"hilalfoods.com",rating:4.2,pop:234,lat:31.4823,lng:74.3912,certs:["ISO 9001","Halal"],export:"Yes",score:74,tier:"High"},
+  {name:"Shan Foods Pvt Ltd",industry:"Food Manufacturing",phone:"042-35761800",addr:"Plot 2, Johar Town, Lahore",area:"Johar Town",website:"shanfoods.com",rating:4.4,pop:312,lat:31.4689,lng:74.2734,certs:["Halal","GMP"],export:"Yes",score:72,tier:"High"},
+  {name:"Premier Sugar Mills",industry:"Food Manufacturing",phone:"042-36281000",addr:"Multan Road Industrial Area, Lahore",area:"Multan Road",website:"N/A",rating:4.1,pop:167,lat:31.4512,lng:74.2456,certs:["ISO 9001"],export:"No",score:70,tier:"High"},
+  {name:"Al-Fatah Food Industries",industry:"Food Manufacturing",phone:"0300-8421000",addr:"Cantt Commercial Area, Lahore",area:"Cantt",website:"N/A",rating:4.2,pop:143,lat:31.5623,lng:74.3289,certs:["Halal"],export:"No",score:65,tier:"Medium"},
+  {name:"Punjab Beverages Co.",industry:"Food Manufacturing",phone:"042-35112000",addr:"Gulberg III, Main Market, Lahore",area:"Gulberg",website:"N/A",rating:4.0,pop:98,lat:31.5234,lng:74.3456,certs:[],export:"N/A",score:62,tier:"Medium"},
+  {name:"Bake Parlor (Pvt) Ltd",industry:"Food Manufacturing",phone:"042-35654000",addr:"DHA Phase 4, Lahore",area:"DHA",website:"N/A",rating:4.1,pop:112,lat:31.4923,lng:74.3812,certs:["Halal"],export:"No",score:60,tier:"Medium"},
+  {name:"Gourmet Foods Pvt Ltd",industry:"Food Manufacturing",phone:"042-35761900",addr:"14-KM, Ferozepur Road, Lahore",area:"Ferozepur Road",website:"gourmetpakistan.com",rating:4.3,pop:278,lat:31.4801,lng:74.2923,certs:[],export:"No",score:58,tier:"Medium"},
+  {name:"Tapal Tea Pvt Ltd",industry:"Food Manufacturing",phone:"042-36280000",addr:"Quaid-e-Azam Industrial Estate, Lahore",area:"Quaid-e-Azam",website:"tapal.com.pk",rating:4.2,pop:234,lat:31.5012,lng:74.3123,certs:["ISO 9001"],export:"No",score:57,tier:"Medium"},
+  {name:"Master Bread",industry:"Food Manufacturing",phone:"042-35761100",addr:"Johar Town, Block E, Lahore",area:"Johar Town",website:"N/A",rating:3.9,pop:87,lat:31.4712,lng:74.2812,certs:[],export:"N/A",score:53,tier:"Medium"},
+  {name:"Quality Food Industries",industry:"Food Manufacturing",phone:"0321-4561000",addr:"Raiwind Road Industrial Zone, Lahore",area:"Raiwind Road",website:"N/A",rating:3.8,pop:64,lat:31.4312,lng:74.4234,certs:[],export:"N/A",score:48,tier:"Medium"},
+  {name:"Golden Star Foods",industry:"Food Manufacturing",phone:"0333-4220000",addr:"Sundar Estate, Plot 45, Lahore",area:"Sundar Estate",website:"N/A",rating:3.9,pop:71,lat:31.4923,lng:74.3512,certs:[],export:"N/A",score:47,tier:"Medium"},
+  {name:"Rehman Food Industries",industry:"Food Manufacturing",phone:"0300-9871000",addr:"Multan Road, Block B, Lahore",area:"Multan Road",website:"N/A",rating:3.7,pop:52,lat:31.4456,lng:74.2512,certs:[],export:"N/A",score:45,tier:"Medium"},
+  {name:"Pak Agri Farms Ltd",industry:"Food Manufacturing",phone:"042-35221000",addr:"Kot Lakhpat, Street 4, Lahore",area:"Kot Lakhpat",website:"N/A",rating:3.8,pop:61,lat:31.5134,lng:74.3012,certs:[],export:"N/A",score:45,tier:"Medium"},
+  {name:"Punjab Flour Mills",industry:"Food Manufacturing",phone:"042-35112500",addr:"Quaid-e-Azam Industrial Estate, Lahore",area:"Quaid-e-Azam",website:"N/A",rating:3.6,pop:43,lat:31.5045,lng:74.3145,certs:[],export:"N/A",score:38,tier:"Low"},
+  {name:"Bilal Food Processing",industry:"Food Manufacturing",phone:"0345-4110000",addr:"Raiwind Road, Lahore",area:"Raiwind Road",website:"N/A",rating:3.5,pop:38,lat:31.4289,lng:74.4312,certs:[],export:"N/A",score:35,tier:"Low"},
+  {name:"Zafar Spices Pvt Ltd",industry:"Food Manufacturing",phone:"0321-8870000",addr:"Johar Town, Lahore",area:"Johar Town",website:"N/A",rating:3.4,pop:29,lat:31.4634,lng:74.2756,certs:[],export:"N/A",score:30,tier:"Low"},
+  {name:"Hamid Food Industries",industry:"Food Manufacturing",phone:"0300-4230000",addr:"Cantt Area, Lahore",area:"Cantt",website:"N/A",rating:3.3,pop:24,lat:31.5589,lng:74.3234,certs:[],export:"N/A",score:25,tier:"Low"},
+  {name:"Karimi Snacks Co.",industry:"Food Manufacturing",phone:"0333-9870000",addr:"DHA Phase 3, Lahore",area:"DHA",website:"N/A",rating:3.2,pop:18,lat:31.4867,lng:74.3756,certs:[],export:"N/A",score:20,tier:"Low"},
+];
+
+function indClass(i){return{"Food Manufacturing":"ind-food","Pharma":"ind-pharma","Textile":"ind-textile","Chemical":"ind-chemical","Automotive":"ind-auto"}[i]||"ind-other";}
+function stars(r){const n=Math.round(parseFloat(r)||0);return"★".repeat(n)+"☆".repeat(5-n);}
+function scoreColor(s){return s>=70?"#10b981":s>=45?"#f59e0b":"#ef4444";}
+function naSpan(v){return(!v||v==="N/A")?`<span class="na">N/A</span>`:v;}
+function websiteHtml(w){
+  if(!w||w==="N/A") return `<span class="na">N/A</span>`;
+  return `<a href="https://${w}" target="_blank" class="website-link">${w}</a>`;
+}
+
+function updateStats(data){
+  document.getElementById("totalCount").textContent=data.length;
+  document.getElementById("highCount").textContent=data.filter(d=>d.tier==="High").length;
+  const avg=data.length?Math.round(data.reduce((a,d)=>a+d.score,0)/data.length):0;
+  document.getElementById("avgScore").textContent=avg;
+  document.getElementById("countDisplay").textContent=data.length;
+}
+
+function render(data){
+  const tbody=document.getElementById("tableBody");
+  const empty=document.getElementById("emptyState");
+  updateStats(data);
+  if(!data.length){tbody.innerHTML="";empty.style.display="block";return;}
+  empty.style.display="none";
+  tbody.innerHTML=data.map((d,i)=>{
+    const col=scoreColor(d.score);
+    const certHtml=d.certs.length?d.certs.map(c=>`<span class="cert-chip">${c}</span>`).join(""):naSpan("N/A");
+    const exportHtml=(!d.export||d.export==="N/A")?`<span class="na">N/A</span>`:(d.export==="Yes"?`<span class="exp-yes">✓ Yes</span>`:`<span class="exp-no">— No</span>`);
+    return`<tr>
+      <td style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;">${i+1}</td>
+      <td class="td-name">${d.name.length>34?d.name.substring(0,34)+"…":d.name}<div class="td-name-sub">${d.area} · Lahore</div></td>
+      <td><span class="ind-tag ${indClass(d.industry)}">${d.industry}</span></td>
+      <td class="phone">${d.phone}</td>
+      <td class="td-addr">${d.addr}</td>
+      <td style="font-size:12px;color:var(--text)">${d.area}</td>
+      <td>${websiteHtml(d.website)}</td>
+      <td><div class="rating-wrap">${d.rating}<span class="stars">${stars(d.rating)}</span></div></td>
+      <td class="pop-score">${d.pop}</td>
+      <td class="td-gps">${d.lat.toFixed(4)},<br>${d.lng.toFixed(4)}</td>
+      <td><div class="cert-wrap">${certHtml}</div></td>
+      <td>${exportHtml}</td>
+      <td><div class="score-wrap"><span class="score-num" style="color:${col}">${d.score}</span><div class="score-bar"><div class="score-fill" style="width:${d.score}%;background:${col}"></div></div></div></td>
+      <td><span class="tier-badge tier-${d.tier}">${d.tier}</span></td>
+    </tr>`;
+  }).join("");
+}
+
+function filter(){
+  const q=document.getElementById("searchInput").value.toLowerCase();
+  const ind=document.getElementById("industryFilter").value;
+  const tier=document.getElementById("tierFilter").value;
+  const exp=document.getElementById("exportFilter").value;
+  render(DATA.filter(d=>
+    (!q||(d.name+d.area+d.addr).toLowerCase().includes(q))&&
+    (!ind||d.industry===ind)&&
+    (!tier||d.tier===tier)&&
+    (!exp||d.export===exp)
+  ));
+}
+
+document.getElementById("searchInput").addEventListener("input",filter);
+document.getElementById("industryFilter").addEventListener("change",filter);
+document.getElementById("tierFilter").addEventListener("change",filter);
+document.getElementById("exportFilter").addEventListener("change",filter);
+render(DATA);
+</script>
+</body>
+</html>
