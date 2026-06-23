@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadFlow — Territory Intelligence Dashboard · Lahore</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--surface:#0c1018;--card:#101520;--border:#1a2535;--accent:#0ea5e9;--accent2:#38bdf8;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--teal:#14b8a6;--text:#e2e8f0;--muted:#4e6280;--faint:#141c28;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(14,165,233,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,0.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(14,165,233,0.07) 0%,transparent 65%);top:-250px;right:-200px;}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%);bottom:-100px;left:-150px;}
+
+.intel-banner{position:relative;z-index:10;background:linear-gradient(135deg,rgba(14,165,233,0.1),rgba(14,165,233,0.04));border-bottom:1px solid rgba(14,165,233,0.2);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);letter-spacing:0.5px;text-align:center;}
+.intel-banner strong{color:#fff;}
+
+header{position:sticky;top:0;z-index:100;background:rgba(7,9,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;}
+.logo span{color:var(--accent);}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:-2px;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.live-pill{display:flex;align-items:center;gap:6px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:20px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+.intel-pill{display:flex;align-items:center;gap:6px;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.2);padding:5px 12px;border-radius:20px;font-size:11px;color:var(--accent2);font-family:'JetBrains Mono',monospace;}
+
+.hero{position:relative;z-index:1;padding:48px 24px 32px;text-align:center;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.15);padding:4px 14px;border-radius:20px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-family:'JetBrains Mono',monospace;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,60px);letter-spacing:2px;line-height:0.95;color:#fff;margin-bottom:14px;}
+h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:540px;margin:0 auto 28px;line-height:1.75;}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:480px;margin:0 auto 12px;}
+.kpi-wide{grid-column:span 2;}
+.kpi{background:var(--card);border:1px solid var(--border);padding:14px 16px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative;overflow:hidden;}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.kpi-blue::before{background:linear-gradient(90deg,var(--accent),transparent);}
+.kpi-green::before{background:linear-gradient(90deg,var(--green),transparent);}
+.kpi-amber::before{background:linear-gradient(90deg,var(--amber),transparent);}
+.kpi-purple::before{background:linear-gradient(90deg,var(--purple),transparent);}
+.kpi-teal::before{background:linear-gradient(90deg,var(--teal),transparent);}
+.kpi-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:1px;line-height:1;}
+.kpi-val .accent{color:var(--accent);}
+.kpi-val .green{color:var(--green);}
+.kpi-val .amber{color:var(--amber);}
+.kpi-val .purple{color:var(--purple);}
+.kpi-val .teal{color:var(--teal);}
+.kpi-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;text-align:center;}
+
+.refresh-banner{position:relative;z-index:1;margin:0 16px 16px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(16,185,129,0.05));border:1px solid rgba(14,165,233,0.15);border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.rb-left{display:flex;align-items:center;gap:10px;}
+.rb-icon{font-size:20px;}
+.rb-title{font-size:13px;font-weight:600;color:#fff;}
+.rb-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.rb-badge{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:8px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+
+.exec-summary{position:relative;z-index:1;margin:0 16px 16px;background:rgba(14,165,233,0.04);border:1px solid rgba(14,165,233,0.15);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;}
+.exec-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.exec-title span{color:var(--accent);}
+.exec-body{font-size:13px;color:var(--muted);line-height:1.75;}
+.exec-body strong{color:var(--text);}
+.exec-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.exec-pill{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.ep-blue{background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.2);color:var(--accent2);}
+.ep-green{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:var(--green);}
+.ep-amber{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--amber);}
+.ep-purple{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);color:var(--purple);}
+
+.section{position:relative;z-index:1;padding:0 16px 20px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.section-title span{color:var(--accent);}
+
+.top-accounts{display:flex;flex-direction:column;gap:10px;}
+.top-account{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start;}
+.ta-rank{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);min-width:32px;line-height:1;opacity:0.6;}
+.ta-body{flex:1;}
+.ta-name{font-weight:600;color:#fff;font-size:14px;margin-bottom:3px;}
+.ta-area{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.ta-reasons{display:flex;gap:6px;flex-wrap:wrap;}
+.ta-reason{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;border-radius:4px;white-space:nowrap;}
+.tr-rating{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--amber);}
+.tr-reviews{background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.2);color:var(--accent2);}
+.tr-service{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:var(--green);}
+.tr-tech{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);color:var(--purple);}
+.tr-booking{background:rgba(20,184,166,0.1);border:1px solid rgba(20,184,166,0.2);color:var(--teal);}
+
+.insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.insight-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.insight-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.insight-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;}
+.insight-row:last-child{margin-bottom:0;}
+.ir-label{font-size:12px;color:var(--text);flex:1;}
+.ir-bar{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.ir-fill{height:100%;border-radius:2px;}
+.ir-val{font-family:'JetBrains Mono',monospace;font-size:11px;min-width:32px;text-align:right;}
+
+.controls{position:relative;z-index:1;padding:0 16px 14px;display:flex;flex-direction:column;gap:10px;}
+.search-wrap{position:relative;}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);}
+input[type=text]{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px 10px 36px;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;}
+input[type=text]:focus{border-color:var(--accent);}
+input[type=text]::placeholder{color:var(--muted);}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+select{flex:1;min-width:110px;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
+select:focus{border-color:var(--accent);}
+.count-badge{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right;}
+.count-badge strong{color:var(--accent);}
+
+.table-wrap{position:relative;z-index:1;padding:0 16px 80px;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100vw;}
+table{width:100%;border-collapse:collapse;min-width:1100px;}
+html,body{max-width:100%;overflow-x:hidden;}
+thead tr{background:var(--surface);border-bottom:1px solid var(--border);}
+th{padding:10px 12px;text-align:left;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+tbody tr{border-bottom:1px solid rgba(26,37,53,0.6);transition:background 0.15s;}
+tbody tr:hover{background:var(--faint);}
+td{padding:11px 12px;font-size:12px;vertical-align:middle;}
+.td-name{font-weight:500;color:#fff;max-width:200px;}
+.td-name-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.td-addr{font-size:11px;color:var(--muted);max-width:200px;line-height:1.4;}
+.td-na{font-size:10px;color:var(--muted);opacity:0.4;font-style:italic;font-family:'JetBrains Mono',monospace;}
+.phone{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);white-space:nowrap;}
+.website-link{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-decoration:none;}
+.website-link:hover{color:var(--accent2);text-decoration:underline;}
+.rating-wrap{display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:12px;white-space:nowrap;}
+.stars{color:var(--amber);font-size:10px;}
+.score-wrap{display:flex;align-items:center;gap:6px;}
+.score-num{font-family:'Bebas Neue',sans-serif;font-size:18px;min-width:28px;}
+.score-bar{width:40px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.score-fill{height:100%;border-radius:2px;}
+.tier-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.tier-t1{background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
+.tier-t2{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.tier-t3{background:rgba(100,116,139,0.1);color:#64748b;border:1px solid rgba(100,116,139,0.2);}
+.empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:13px;}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:20px 24px;text-align:center;font-size:11px;color:var(--muted);}
+footer strong{color:var(--text);}
+.footer-note{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15);padding:5px 14px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent2);}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="intel-banner">
+  🧠 &nbsp;<strong>TERRITORY INTELLIGENCE</strong>&nbsp; — Lahore · Medical Practitioners · AI-Powered Account Prioritization &amp; Opportunity Discovery
+</div>
+
+<header>
+  <div>
+    <div class="logo">Lead<span>Flow</span></div>
+    <div class="logo-sub">Territory Intelligence Platform</div>
+  </div>
+  <div class="header-right">
+    <div class="live-pill"><div class="dot"></div>Live Intelligence</div>
+    <div class="intel-pill">🧠 AI Analyzed</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-tag">🇵🇰 Lahore · Medical Territory · Account Prioritization</div>
+  <h1>TERRITORY INTELLIGENCE<br><span>DASHBOARD</span></h1>
+  <p class="hero-sub">AI-powered account prioritization for pharma sales teams. Identify, score, and prioritize physician opportunities within a territory before your team makes a single call.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi kpi-blue">
+      <div class="kpi-val"><span class="accent">50</span></div>
+      <div class="kpi-lbl">Accounts Analyzed</div>
+    </div>
+    <div class="kpi kpi-green">
+      <div class="kpi-val"><span class="green">20</span></div>
+      <div class="kpi-lbl">Tier 1 Opportunities</div>
+    </div>
+    <div class="kpi kpi-purple">
+      <div class="kpi-val"><span class="purple">10</span></div>
+      <div class="kpi-lbl">Specialty Categories</div>
+    </div>
+    <div class="kpi kpi-teal">
+      <div class="kpi-val"><span class="teal">4.5</span></div>
+      <div class="kpi-lbl">Avg. Reputation Score</div>
+    </div>
+    <div class="kpi kpi-wide kpi-amber">
+      <div class="kpi-val"><span class="amber">40</span>%</div>
+      <div class="kpi-lbl">Market Presence Coverage · Active Digital Footprint</div>
+    </div>
+  </div>
+</section>
+
+<div class="refresh-banner" style="position:relative;z-index:1;">
+  <div class="rb-left">
+    <div class="rb-icon">🔄</div>
+    <div>
+      <div class="rb-title">Territory Intelligence — Sample Preview</div>
+      <div class="rb-sub">Territory analysis: June 2026 · Lahore · Physician Market Intelligence</div>
+    </div>
+  </div>
+  <div class="rb-badge">Territory Intelligence Across Any Pakistani Market</div>
+</div>
+
+<div class="exec-summary">
+  <div class="exec-title">📊 Executive <span>Territory Summary</span></div>
+  <div class="exec-body">
+    Most pharma sales teams enter a territory blind. LeadFlow mapped the Lahore physician market and surfaced <strong>significant differences in market presence, reputation strength and territory fit</strong> across practitioners — giving territory managers a clear, prioritized view of the market before a single call is made.<br><br>
+    This sample identified <strong>20 Tier 1 Opportunity accounts</strong> representing the highest-priority physicians based on market presence, reputation signals and territory fit. The sample spans <strong>10 distinct specialty categories</strong>, with an average reputation score of <strong>4.5 out of 5</strong> — reflecting a strong base of credible, active practitioners across the territory.
+  </div>
+  <div class="exec-pills">
+    <div class="exec-pill ep-green">✓ 20 Tier 1 Accounts Identified</div>
+    <div class="exec-pill ep-blue">✓ 10 Specialty Categories Mapped</div>
+    <div class="exec-pill ep-amber">✓ 4.5 Average Reputation Score</div>
+    <div class="exec-pill ep-purple">✓ Full Territory Coverage Available</div>
+  </div>
+</div>
+
+<!-- TOP PRIORITY ACCOUNTS -->
+<div class="section">
+  <div class="section-title">🏆 Top Priority <span>Accounts</span></div>
+  <div class="top-accounts" id="topAccounts"></div>
+</div>
+
+<!-- SCORE METHODOLOGY -->
+<div class="section">
+  <div class="section-title">🎯 Opportunity Score <span>Methodology</span></div>
+  <div class="exec-summary" style="margin:0 0 0 0;">
+    <div class="exec-body">
+      <strong>How LeadFlow ranks accounts within a territory</strong><br><br>
+      LeadFlow combines multiple market, commercial and territory signals into a single Opportunity Score to help sales teams prioritize accounts within a territory. Every account is evaluated and assigned a score from 0 to 100 — creating a defensible, data-driven priority order that removes guesswork from territory planning.
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Market Presence</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:6px;">Visibility &amp; Market Engagement</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Measures the strength, visibility and engagement of a practitioner within the local market.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Commercial Potential</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:6px;">Revenue Opportunity Indicators</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Identifies indicators associated with patient volume and practice growth.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:8px;">Territory Fit</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:6px;">Alignment with Opportunity Patterns</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Measures alignment with opportunity patterns observed across the territory.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Accessibility</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:6px;">Discovery &amp; Engagement</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Evaluates how easily this account can be discovered and engaged with.</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding:12px 16px;background:rgba(14,165,233,0.05);border:1px solid rgba(14,165,233,0.15);border-radius:8px;font-size:12px;color:var(--muted);line-height:1.7;">
+      <strong style="color:var(--text);">Score Tiers:</strong> &nbsp;
+      <span style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:11px;">Tier 1 (70–100)</span> — Highest opportunity accounts. Prioritize immediately. &nbsp;·&nbsp;
+      <span style="color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:11px;">Tier 2 (40–69)</span> — Strong secondary opportunities. &nbsp;·&nbsp;
+      <span style="color:#64748b;font-family:'JetBrains Mono',monospace;font-size:11px;">Tier 3 (0–39)</span> — Emerging accounts.
+    </div>
+  </div>
+</div>
+
+<!-- TERRITORY INSIGHTS -->
+<div class="section">
+  <div class="section-title">📈 Territory <span>Intelligence Insights</span></div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7;">Strategic observations derived from the Lahore physician territory sample.</p>
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-title">Specialty Mix</div>
+      <div class="insight-row"><div class="ir-label">General Practice</div><div class="ir-bar"><div class="ir-fill" style="width:52%;background:var(--accent)"></div></div><div class="ir-val" style="color:var(--accent)">52%</div></div>
+      <div class="insight-row"><div class="ir-label">Specialist Practice</div><div class="ir-bar"><div class="ir-fill" style="width:48%;background:var(--accent)"></div></div><div class="ir-val" style="color:var(--accent)">48%</div></div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-title">Market Presence</div>
+      <div class="insight-row"><div class="ir-label">Tier 1 Opportunity</div><div class="ir-bar"><div class="ir-fill" style="width:40%;background:var(--green)"></div></div><div class="ir-val" style="color:var(--green)">40%</div></div>
+      <div class="insight-row"><div class="ir-label">Tier 2 Opportunity</div><div class="ir-bar"><div class="ir-fill" style="width:30%;background:var(--amber)"></div></div><div class="ir-val" style="color:var(--amber)">30%</div></div>
+      <div class="insight-row"><div class="ir-label">Tier 3 Opportunity</div><div class="ir-bar"><div class="ir-fill" style="width:30%;background:#64748b"></div></div><div class="ir-val" style="color:#64748b">30%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search account, specialty, area...">
+  </div>
+  <div class="filter-row">
+    <select id="specialtyFilter"><option value="">All Specialties</option></select>
+    <select id="tierFilter">
+      <option value="">All Tiers</option>
+      <option value="Tier 1 Opportunity">Tier 1 Opportunity</option>
+      <option value="Tier 2 Opportunity">Tier 2 Opportunity</option>
+      <option value="Tier 3 Opportunity">Tier 3 Opportunity</option>
+    </select>
+  </div>
+  <div class="count-badge">Showing <strong id="countDisplay">50</strong> accounts</div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Account</th><th>Specialty</th><th>Phone</th><th>Area</th>
+        <th>Address</th><th>GPS</th><th>Rating</th><th>Hours</th><th>Website</th>
+        <th>Score</th><th>Priority Tier</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="empty" id="emptyState" style="display:none;">No accounts match your filters</div>
+</div>
+
+<footer>
+  <strong>LeadFlow</strong> · Territory Intelligence Platform · Lahore · Physician Territory Analysis<br>
+  <div class="footer-note">🧠 Territory Intelligence · Account Prioritization · Opportunity Discovery · LeadFlow</div>
+</footer>
+
+<script>
+const DATA=[
+{name:"Rehmatul-Lil-Alameen Post Graduate Institute of Cardiology",specialty:"Cardiologist",phone:"(042) 99330101",area:"Multan Rd",address:"Main Multan chungi, Multan Rd, Kakazai",rating:4.4,popularity:31,tier:"Medium",hours:"Mon: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours",website:"https://pessi.punjab.gov.pk/rehmatul_lil_alameen_institute_of_cardiology",lat:31.4971,lng:74.261999},
+{name:"Rejuvenate Clinic",specialty:"GP",phone:"0311 1173588",area:"251-K3 Chashma Rd",address:"251-K3 Chashma Rd, WAPDA Town Block K 3 Wapda Town Phase 1 Lahore",rating:4.4,popularity:36,tier:"Medium",hours:"Mon: 12:00-9:00 PM | Tuesday: 12:00-9:00 PM | Wednesday: 12:00-9:00 PM",website:"http://rejuvenateclinic.pk",lat:31.41986,lng:74.260254},
+{name:"Reliv",specialty:"GP",phone:"0311 1188466",area:"4 CCA Main Commercial Market",address:"4 CCA Main Commercial Market, Sector C Phase 5 D.H.A",rating:5.0,popularity:90,tier:"High",hours:"Mon: 12:30-8:30 PM | Tuesday: 1:30-8:30 PM | Wednesday: 12:30-8:30 PM",website:"https://reliv.clinic",lat:31.463159,lng:74.414218},
+{name:"Dr. Maria Farrukh Gynaecologist\u2122 MBBS(KEMU), FCPS (Obs&Gynae)",specialty:"Gynecologist",phone:"0334 7909043",area:"Airline Blvd",address:"Airline Blvd, Airline Society",rating:5.0,popularity:120,tier:"High",hours:"Mon: 4:00-10:00 PM | Tuesday: 4:00-10:00 PM | Wednesday: 4:00-10:00 PM",website:"N/A",lat:31.443853,lng:74.267468},
+{name:"Dr Syed Sibtain Ul Hassan (Internal Medicine Specialist) Liver & Diabetes clinic",specialty:"Gastroenterologist",phone:"0315 8595790",area:"Lahore",address:"Omar hospital and Cardiac Center Johar Town Plot No. 393-396 & 423-426, Block D II Johar Town, 54000 Block D",rating:5.0,popularity:152,tier:"High",hours:"Mon: 3:00-6:00 PM | Tuesday: 3:00-6:00 PM | Wednesday: 3:00-6:00 PM",website:"https://sibtainhassan.com",lat:31.457744,lng:74.288623},
+{name:"Dr salamat ullah child specialist",specialty:"Pediatrician",phone:"0308 6759999",area:"Plot 252",address:"Plot 252, Huma Block Allama Iqbal Town",rating:3.9,popularity:7,tier:"Low",hours:"Mon: 6:30-9:30 PM | Tuesday: 6:30-9:30 PM | Wednesday: 6:30-9:30 PM",website:"N/A",lat:31.52409,lng:74.287242},
+{name:"Lahore Dental Clinic",specialty:"Dentist",phone:"0334 9495671",area:"Mansoorah Multan Rd",address:"Mansoorah Multan Rd, Cresent Town",rating:4.4,popularity:28,tier:"Medium",hours:"Mon: 11:00 AM-10:00 PM | Tuesday: 11:00 AM-10:00 PM | Wednesday: 11:00 AM-10:00 PM",website:"N/A",lat:31.493782,lng:74.262717},
+{name:"MedGyn Clinic",specialty:"GP",phone:"0306 1600001",area:"near UMT Hostel",address:"near UMT Hostel, Mustafa Town",rating:5.0,popularity:139,tier:"High",hours:"Mon: 5:00-10:00 PM | Tuesday: 5:00-10:00 PM | Wednesday: 5:00-10:00 PM",website:"https://medgyn.pk",lat:31.492732,lng:74.2707},
+{name:"Al Mustafa Maternity & General Hospital",specialty:"Gynecologist",phone:"(042) 37492508",area:"F7R4+M53",address:"F7R4+M53, Ittefaq Town",rating:4.4,popularity:24,tier:"Medium",hours:"N/A",website:"N/A",lat:31.49164,lng:74.255435},
+{name:"Dr Sajjad Hussain",specialty:"GP",phone:"0305 1155777",area:"25-Empress road Nova medical centre opposite Qilla gujjar singh police line",address:"25-Empress road Nova medical centre opposite Qilla gujjar singh police line, Muhammad Nagar Garhi Shahu",rating:5.0,popularity:99,tier:"High",hours:"Mon: 3:00 PM-12:00 AM | Tuesday: 3:00 PM-12:00 AM | Wednesday: 3:00 PM-12:00 AM",website:"N/A",lat:31.566243,lng:74.336181},
+{name:"The Eye Associates",specialty:"Eye Specialist",phone:"0308 4667639",area:"2 Justice Sardar Iqbal Road",address:"2 Justice Sardar Iqbal Road, Gulberg V",rating:4.4,popularity:20,tier:"Medium",hours:"Mon: 10:00 AM-9:00 PM | Tuesday: 10:00 AM-9:00 PM | Wednesday: 10:00 AM-9:00 PM",website:"http://eyeassociates.pk",lat:31.541574,lng:74.349004},
+{name:"Muhammad Ali Jinnah Medical Complex",specialty:"GP",phone:"(042) 37427394",area:"Street 1",address:"G8GF+7Q6, Street 1, Fazlia Colony",rating:4.4,popularity:45,tier:"Medium",hours:"N/A",website:"N/A",lat:31.525651,lng:74.324394},
+{name:"Jaws and Ivory dental clinic",specialty:"Dentist",phone:"0312 8888494",area:"122c Dha phase 6",address:"122c Dha phase 6",rating:5.0,popularity:117,tier:"High",hours:"Mon: 12:00-9:00 PM | Tuesday: 12:00-9:00 PM | Wednesday: 12:00-9:00 PM",website:"https://jawsandivory.com",lat:31.467628,lng:74.45095},
+{name:"Dental Pearl Clinic",specialty:"Dentist",phone:"0345 3114737",area:"461-A",address:"461-A, Block A Revenue Employees Cooperative Housing Society",rating:5.0,popularity:152,tier:"High",hours:"Mon: 10:30 AM-1:00 PM, 5:00-10:00 PM | Tuesday: 10:30 AM-1:00 PM, 5:00-10:00 PM | Wednesday: 10:30 AM-1:00 PM, 5:00-10:00 PM",website:"https://www.dentalpearlclinic.com",lat:31.454081,lng:74.283754},
+{name:"Minhas poly Clinic",specialty:"GP",phone:"(042) 37576913",area:"Chowk Baba Azam Rd",address:"Alfateh Road, Chowk Baba Azam Rd, Kamboh Colony",rating:3.9,popularity:10,tier:"Low",hours:"Mon: 9:00 AM-1:00 PM, 5:00-10:00 PM | Tuesday: 9:00 AM-1:00 PM, 5:00-10:00 PM | Wednesday: 9:00 AM-1:00 PM, 5:00-10:00 PM",website:"N/A",lat:31.530499,lng:74.309161},
+{name:"Dr Saeed",specialty:"GP",phone:"0300 9494118",area:"G9Q2+69Q",address:"G9Q2+69Q, Gulberg V",rating:3.9,popularity:11,tier:"Low",hours:"Mon: 10:00 AM-10:00 PM | Tuesday: 10:00 AM-10:00 PM | Wednesday: 10:00 AM-10:00 PM",website:"N/A",lat:31.538094,lng:74.35098},
+{name:"Bon Beaute Skin & Medical Clinic",specialty:"Dermatologist",phone:"0325 0911113",area:"14-A Khayaban-e-Iqbal",address:"14-A Khayaban-e-Iqbal, XX BLOCK Sector XX DHA Phase 3",rating:5.0,popularity:124,tier:"High",hours:"Mon: 12:00 AM-10:00 PM | Tuesday: 12:00-10:00 PM | Wednesday: 12:00-10:00 PM",website:"https://www.facebook.com/share/1ASLZxuQbF",lat:31.471255,lng:74.36581},
+{name:"Tanveer Hospital",specialty:"GP",phone:"0333 4323242",area:"106 Malik Munir Rd",address:"106 Malik Munir Rd, D Block Block D Gulshan-e-Ravi",rating:4.4,popularity:34,tier:"Medium",hours:"Mon: 9:00 AM-3:00 PM, 7:00-10:00 PM | Tuesday: 9:00 AM-3:00 PM, 7:00-10:00 PM | Wednesday: 9:00 AM-3:00 PM, 7:00-10:00 PM",website:"N/A",lat:31.554658,lng:74.287987},
+{name:"Farooq Urology Clinic and Infertility centre best urologist",specialty:"Urologist",phone:"0300 4239319",area:"Jinnah Colony",address:"Jinnah Colony, New Samanabad Samanabad Town",rating:3.9,popularity:14,tier:"Low",hours:"Mon: 8:00-10:00 PM | Tuesday: 8:00-10:00 PM | Wednesday: 8:00-10:00 PM",website:"N/A",lat:31.533522,lng:74.305226},
+{name:"THE DENTAL HOME",specialty:"Dentist",phone:"0304 2727277",area:"Dhaka Rd",address:"Ground Floor; Al Rehman Shopping plaza; Opposite HBL Cantt branch; Saddar bazar, Dhaka Rd, Cantt",rating:5.0,popularity:510,tier:"High",hours:"Mon: 6:30-10:00 PM | Tuesday: 6:30-10:00 PM | Wednesday: 6:30-10:00 PM",website:"N/A",lat:31.546362,lng:74.377154},
+{name:"Imtiaz Poly clinic",specialty:"GP",phone:"0309 8788720",area:"80",address:"Bahria, Talha block, 80, G Commercial Sector F town",rating:3.9,popularity:7,tier:"Low",hours:"Mon: 4:00-10:00 PM | Tuesday: 4:00-10:00 PM | Wednesday: 4:00-10:00 PM",website:"N/A",lat:31.362372,lng:74.17104},
+{name:"Family Dental Clinic",specialty:"Pediatrician",phone:"0300 0090606",area:"Amna Medical Center and Children Clinic",address:"House no: 83, Amna Medical Center and Children Clinic, Tarbela Road, Block J2 Block J 2 Wapda Town Phase 1 Lahore",rating:5.0,popularity:92,tier:"High",hours:"Mon: 10:00 AM-11:00 PM | Tuesday: 10:00 AM-11:00 PM | Wednesday: 10:30 AM-11:00 PM",website:"https://familydentalsclinic.com",lat:31.426109,lng:74.261685},
+{name:"Dentalogix (Dental & Aesthetic Clinic)",specialty:"Dermatologist",phone:"(042) 35915683",area:"72-77 Bank Square Market",address:"3rd Floor, 72-77 Bank Square Market, Model Town",rating:4.4,popularity:19,tier:"Medium",hours:"Mon: 10:00 AM-10:00 PM | Tuesday: 10:00 AM-10:00 PM | Wednesday: 10:00 AM-10:00 PM",website:"N/A",lat:31.488719,lng:74.325364},
+{name:"Skin Specialist Clinic - Dr. Umair Bajwa",specialty:"Dermatologist",phone:"0321 4005777",area:"Mini Market\u060c near Khalid Masjid",address:"Mini Market\u060c near Khalid Masjid, Cavalry Ground",rating:3.8,popularity:17,tier:"Low",hours:"Mon: 6:00-8:00 PM | Tuesday: 6:00-8:00 PM | Wednesday: 7:00-9:00 AM, 6:00-8:00 PM",website:"https://www.facebook.com/documairbajwa",lat:31.49928,lng:74.366331},
+{name:"Dr.Tareen Clinic",specialty:"GP",phone:"0322 4940859",area:"29-D/1 Sir Syed Rd",address:"29-D/1 Sir Syed Rd, Block D1 Gulberg III",rating:3.9,popularity:9,tier:"Low",hours:"Mon: 5:00-7:00 PM | Tuesday: 5:00-7:00 PM | Wednesday: 5:00-7:00 PM",website:"N/A",lat:31.516141,lng:74.346352},
+{name:"THE PETS' CLINIC",specialty:"GP",phone:"0334 7475222",area:"Johar Town",address:"33/F1, Opposite Lda Plaza,Johar Town, Block F 1 Phase 1 Johar Town",rating:4.4,popularity:20,tier:"Medium",hours:"Mon: 11:00 AM-9:30 PM | Tuesday: 11:00 AM-9:30 PM | Wednesday: 11:00 AM-9:30 PM",website:"http://www.petsmall.pk",lat:31.459991,lng:74.282},
+{name:"Asghar Hospital",specialty:"GP",phone:"(042) 37553300",area:"3 L Ghazali Rd",address:"3 L Ghazali Rd, Samanabad Town",rating:4.4,popularity:25,tier:"Medium",hours:"N/A",website:"N/A",lat:31.538312,lng:74.305975},
+{name:"Professor Dr Muhammad Haroon, Rheumatology Clinic, Lahore",specialty:"GP",phone:"0333 4209919",area:"Doctors Hospital & Medical Centre",address:"Doctors Hospital & Medical Centre, Block G1 Block G 1 Phase 1 Johar Town",rating:4.4,popularity:49,tier:"Medium",hours:"Mon: 6:00-9:00 PM | Tuesday: 6:00-9:00 PM | Wednesday: 6:00-9:00 PM",website:"N/A",lat:31.47979,lng:74.280512},
+{name:"Hazrat Ayesha Siddiqua Hospital",specialty:"GP",phone:"(042) 37283027",area:"Allah Bukhsh St",address:"H8QQ+Q5F, Allah Bukhsh St, Wassan Pura Misri Shah",rating:4.4,popularity:44,tier:"Medium",hours:"N/A",website:"N/A",lat:31.589439,lng:74.337932},
+{name:"Ikram Clinic (Dr. Imran Hasan Khan)",specialty:"GP",phone:"(042) 35863036",area:"36 Street D",address:"36 Street D, Block D Model Town",rating:3.9,popularity:9,tier:"Low",hours:"Mon: 6:00-9:00 PM | Tuesday: 6:00-9:00 PM | Wednesday: 6:00-9:00 PM",website:"N/A",lat:31.487348,lng:74.321419},
+{name:"Polytest Clinic Prof. Dr. Yasser Amin",specialty:"GP",phone:"0333 7421715",area:"715 Shadman Colony",address:"715 Shadman Colony, Shadman 1 Shadman",rating:3.9,popularity:7,tier:"Low",hours:"Mon: 6:00 PM-12:00 AM | Tuesday: 6:00 PM-12:00 AM | Wednesday: 6:00 PM-12:00 AM",website:"N/A",lat:31.534408,lng:74.328866},
+{name:"Best way medical clinic",specialty:"GP",phone:"(042) 35311077",area:"2 Main Blvd",address:"77 G2 phase, 2 Main Blvd, Block G2 Block R 1 Phase 2 Johar Town",rating:3.9,popularity:12,tier:"Low",hours:"Mon: 9:00 AM-4:00 PM | Tuesday: 9:00 AM-4:00 PM | Wednesday: 9:00 AM-4:00 PM",website:"N/A",lat:31.476436,lng:74.271113},
+{name:"Care n Cure - Dental Clinic",specialty:"Dentist",phone:"0333 4261220",area:"C8V4+RFC",address:"C8V4+RFC, Township Block 3 Twp Sector C 1 Lahore",rating:4.4,popularity:19,tier:"Medium",hours:"Mon: 4:00-10:00 PM | Tuesday: 4:00-10:00 PM | Wednesday: 4:00-10:00 PM",website:"N/A",lat:31.44457,lng:74.306145},
+{name:"Dr. Zulfiqar's Dental Practice",specialty:"Dentist",phone:"0331 6281572",area:"overseas A commercial",address:"overseas A commercial, Plaza No 27 F/F",rating:3.9,popularity:7,tier:"Low",hours:"Mon: 11:00 AM-1:00 PM, 5:00-10:00 PM | Tuesday: 11:00 AM-1:00 PM, 5:00-10:00 PM | Wednesday: 11:00 AM-1:00 PM, 5:00-10:00 PM",website:"N/A",lat:31.377731,lng:74.174526},
+{name:"Doctor Farhan Mustafa - Best consultant physician in Lahore | FCPS ,MRCP UK INTERNAL MEDICINE | MEDICAL SPECIALIST PAKISTAN",specialty:"GP",phone:"0328 1285228",area:"near Jinnah hospital",address:"860 fast university road, near Jinnah hospital, Block B Faisal Town",rating:5.0,popularity:105,tier:"High",hours:"Mon: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours",website:"N/A",lat:31.478478,lng:74.301652},
+{name:"Dr Farrkh Zaman",specialty:"GP",phone:"(042) 35882656",area:"G86G+PWC",address:"G86G+PWC, Abu Bakar Block Garden Town",rating:3.8,popularity:16,tier:"Low",hours:"Mon: 9:00 AM-7:30 PM | Tuesday: 9:00 AM-7:30 PM | Wednesday: 9:00 AM-7:30 PM",website:"N/A",lat:31.511806,lng:74.327252},
+{name:"Raza Medical Complex",specialty:"GP",phone:"0301 8484643",area:"10-C ll",address:"G8QP+2PC, 10-C ll, Shadman II Shadman 2 Shadman",rating:3.8,popularity:19,tier:"Low",hours:"Mon: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours",website:"https://web.facebook.com/RmcLhe",lat:31.537577,lng:74.336701},
+{name:"Dr. Muhammad Sufyan Asim Gastroenterologist, Hepatologist, Diabetologist, Interventional Endoscopist & ERCP specialist",specialty:"Gastroenterologist",phone:"0344 6110256",area:"near Jail Road",address:"Doctors Corner, 28-A, near Jail Road, Shadman II Shadman 2 Shadman",rating:5.0,popularity:161,tier:"High",hours:"Mon: 10:30 AM-11:00 PM | Tuesday: 10:30 AM-11:00 PM | Wednesday: 10:30 AM-11:00 PM",website:"N/A",lat:31.536224,lng:74.338489},
+{name:"Claire Skin Clinic",specialty:"Dermatologist",phone:"0332 6121314",area:"Saddar Gol Chakar",address:"Peak Solutions | Best IT Institute (Saddar Cantt Campus), Zarrar Shaheed Road Near Sadar, Saddar Gol Chakar, Old Officers Colony",rating:4.4,popularity:28,tier:"Medium",hours:"Mon: 5:00-7:00 PM | Tuesday: 5:00-7:00 PM | Wednesday: 5:00-7:00 PM",website:"N/A",lat:31.549917,lng:74.381276},
+{name:"Dr Raheela Farooq",specialty:"GP",phone:"0316 4243589",area:"35 Expo Center Rd",address:"F7F5+8P4, 35 Expo Center Rd, Block H-3 Block H 3 Phase 2 Johar Town",rating:3.9,popularity:11,tier:"Low",hours:"Mon: 11:00 AM-9:00 PM | Tuesday: 11:00 AM-9:00 PM | Wednesday: 11:00 AM-9:00 PM",website:"https://drraheelagynaecologist.com",lat:31.473208,lng:74.259221},
+{name:"MediCall",specialty:"GP",phone:"0310 8808880",area:"105",address:"105, Block B2 Block B 2 Phase 1 Johar Town",rating:5.0,popularity:151,tier:"High",hours:"Mon: 9:00 AM-12:00 AM | Tuesday: 9:00 AM-12:00 AM | Wednesday: 9:00 AM-12:00 AM",website:"http://www.medicall.pk",lat:31.463411,lng:74.293443},
+{name:"Latif Children Clinic",specialty:"Pediatrician",phone:"(042) 35220611",area:"F Jagawar Chowk 90",address:"F Jagawar Chowk 90, Block F Phase 1 Johar Town",rating:4.4,popularity:19,tier:"Medium",hours:"Mon: 7:00-10:00 PM | Tuesday: 7:00-10:00 AM | Wednesday: 7:00-10:00 PM",website:"N/A",lat:31.467603,lng:74.292905},
+{name:"Dr. GM Chaudhary (Pediatric Surgeon & Pediatric Urologist) | Best Pediatric Surgeon in Lahore",specialty:"Urologist",phone:"0346 0048705",area:"Johar",address:"Iffat Anwar Medical Complex, Sutlej Ave,PGECHS, near Awaisia Housing Society Park, Awasia Housing Society Awaisia Housing Scheme, Johar, Town",rating:5.0,popularity:149,tier:"High",hours:"Mon: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours",website:"http://gmthesurgeon.com",lat:31.437869,lng:74.288583},
+{name:"Oral Square",specialty:"Dentist",phone:"0300 4624684",area:"8",address:"8, D Block Commercial Area Valancia Housing Society",rating:5.0,popularity:140,tier:"High",hours:"Mon: 10:00 AM-10:00 PM | Tuesday: 10:00 AM-10:00 PM | Wednesday: 10:00 AM-10:00 PM",website:"N/A",lat:31.409192,lng:74.259887},
+{name:"Dr Sana Nazir Gynaecologist Infertility & IVF Specialist",specialty:"Gynecologist",phone:"0300 1115372",area:"15-C Ghalib Rd",address:"15-C Ghalib Rd, Block C Gulberg 2",rating:5.0,popularity:102,tier:"High",hours:"Mon: 7:00-9:00 PM | Tuesday: 10:00 AM-5:00 PM | Wednesday: 7:00-9:00 PM",website:"https://drsananazirgynaecologist.com",lat:31.520786,lng:74.340118},
+{name:"Dr Nesr : Eye Surgeon, Best eye specialist in Lahore",specialty:"Eye Specialist",phone:"0311 4277742",area:"near Allah Hoo",address:"Chowk Road, near Allah Hoo, Block E Phase 1 Johar Town",rating:5.0,popularity:101,tier:"High",hours:"Mon: 6:00-9:00 PM | Tuesday: 5:00-9:00 PM | Wednesday: 6:00-9:00 PM",website:"http://www.nesrfarooq.com",lat:31.469527,lng:74.298137},
+{name:"Prof. Dr. Usman Ali Rahman | Best General Surgeon Lahore",specialty:"Surgeon",phone:"0321 4597747",area:"1 Canal Rd",address:"152-G, Doctors Hospital, 1 Canal Rd, Block G1 Block G 1 Phase 1 Johar Town",rating:5.0,popularity:98,tier:"High",hours:"Mon: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours",website:"https://www.generalsurgicalalliance.com",lat:31.479651,lng:74.280369},
+{name:"Dr. Fareeha Shabeer Dental Clinic",specialty:"Dentist",phone:"0335 9872987",area:"9A \u200fMain Blvd Gulshan-e-Ravi",address:"9A \u200fMain Blvd Gulshan-e-Ravi, A Block Block A Gulshan-e-Ravi",rating:5.0,popularity:184,tier:"High",hours:"Mon: 12:00-10:00 PM | Tuesday: 12:00-10:00 PM | Wednesday: 12:00-10:00 PM",website:"https://drfareehashabeer.com",lat:31.548608,lng:74.29115},
+{name:"Dr Muhammad Shahzad Hafeez",specialty:"GP",phone:"0334 9923771",area:"surgimed hospital zafar Ali road gulberg 5 Lahore",address:"surgimed hospital zafar Ali road gulberg 5 Lahore, Al Hafeez Clinic saddar round about zarar shaheed road",rating:5.0,popularity:145,tier:"High",hours:"Mon: 5:30-11:00 PM | Tuesday: 5:30-11:00 PM | Wednesday: 5:30-11:00 PM",website:"N/A",lat:31.549968,lng:74.38153},
+{name:"Arthritis Care Clinic",specialty:"GP",phone:"(042) 37424569",area:"680 Shadman Rd",address:"680 Shadman Rd, Shadman 1 Shadman",rating:3.9,popularity:10,tier:"Low",hours:"Mon: 11:00 AM-11:00 PM | Tuesday: 11:00 AM-11:00 PM | Wednesday: 11:00 AM-11:00 PM",website:"N/A",lat:31.534518,lng:74.329609}
+];
+
+function scoreFromTier(t,rating,popularity){
+  let base = t==="High"?70:t==="Medium"?40:10;
+  let bonus = Math.min(Math.round((rating-3.5)*8),15) + Math.min(Math.round(popularity/15),15);
+  return Math.max(0,Math.min(99,base+bonus));
+}
+function tierLabel(t){return t==="High"?"Tier 1 Opportunity":t==="Medium"?"Tier 2 Opportunity":"Tier 3 Opportunity";}
+function tierClass(t){return t==="Tier 1 Opportunity"?"tier-t1":t==="Tier 2 Opportunity"?"tier-t2":"tier-t3";}
+function scoreColor(s){return s>=70?"#10b981":s>=40?"#f59e0b":"#64748b";}
+function stars(r){const n=Math.round(r);return"★".repeat(n)+"☆".repeat(5-n);}
+function naOrVal(v,cls){return(!v||v==="N/A")?'<span class="td-na">N/A</span>':'<span class="'+cls+'">'+v+'</span>';}
+
+// Precompute score + tier label for each record
+DATA.forEach(d=>{ d.score=scoreFromTier(d.tier,d.rating,d.popularity); d.tierLabel=tierLabel(d.tier); });
+DATA.sort((a,b)=>b.score-a.score);
+
+function buildTopAccounts(){
+  const top=DATA.slice(0,5);
+  const html=top.map((d,i)=>{
+    const drivers=[];
+    if(d.rating>=4.8)drivers.push('<span class="ta-reason tr-rating">Strong Market Presence</span>');
+    else if(d.rating>=4.3)drivers.push('<span class="ta-reason tr-rating">Established Market Presence</span>');
+    if(d.popularity>=80)drivers.push('<span class="ta-reason tr-reviews">High Commercial Potential</span>');
+    else if(d.popularity>=40)drivers.push('<span class="ta-reason tr-reviews">Strong Commercial Potential</span>');
+    if(d.website!=="N/A")drivers.push('<span class="ta-reason tr-tech">Digital Presence Established</span>');
+    drivers.push('<span class="ta-reason tr-booking">Territory Priority</span>');
+    const col=scoreColor(d.score);
+    const tierBadge='<span class="tier-badge '+tierClass(d.tierLabel)+'" style="margin-left:4px;">'+d.tierLabel+'</span>';
+    return'<div class="top-account"><div class="ta-rank">0'+(i+1)+'</div><div class="ta-body"><div class="ta-name">'+d.name+'</div><div class="ta-area">'+tierBadge+' '+d.specialty+' · '+d.area+' &nbsp;<span style="color:'+col+';font-family:JetBrains Mono,monospace;font-size:11px;">'+d.score+' pts</span></div><div class="ta-reasons" style="margin-top:8px;">'+drivers.join("")+'</div></div></div>';
+  }).join("");
+  document.getElementById("topAccounts").innerHTML=html;
+}
+
+function populateSpecialtyFilter(){
+  const specs=[...new Set(DATA.map(d=>d.specialty))].sort();
+  const sel=document.getElementById("specialtyFilter");
+  specs.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;sel.appendChild(o);});
+}
+
+function updateStats(data){
+  document.getElementById("countDisplay").textContent=data.length;
+}
+
+function render(data){
+  const tbody=document.getElementById("tableBody");
+  const empty=document.getElementById("emptyState");
+  updateStats(data);
+  if(!data.length){tbody.innerHTML="";empty.style.display="block";return;}
+  empty.style.display="none";
+  tbody.innerHTML=data.map((d,i)=>{
+    const col=scoreColor(d.score);
+    const nameShort=d.name.length>32?d.name.substring(0,32)+"…":d.name;
+    const wshort=d.website==="N/A"?"N/A":d.website.replace(/https?:\/\/(www\.)?/,"").substring(0,24);
+    return '<tr>'+
+      '<td style="color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px;">'+(i+1)+'</td>'+
+      '<td><div class="td-name">'+nameShort+'</div><div class="td-name-sub">'+d.area+'</div></td>'+
+      '<td style="font-size:12px;color:var(--text);white-space:nowrap">'+d.specialty+'</td>'+
+      '<td class="phone">'+d.phone+'</td>'+
+      '<td style="font-size:12px;color:var(--text);white-space:nowrap">'+d.area+'</td>'+
+      '<td class="td-addr">'+d.address+'</td>'+
+      '<td><a href="https://maps.google.com/?q='+d.lat+','+d.lng+'" target="_blank" class="website-link">'+d.lat.toFixed(4)+', '+d.lng.toFixed(4)+'</a></td>'+
+      '<td><div class="rating-wrap">'+d.rating.toFixed(1)+'<span class="stars">'+stars(d.rating)+'</span></div></td>'+
+      '<td style="font-family:JetBrains Mono,monospace;font-size:10px;color:var(--muted);white-space:nowrap">'+d.hours+'</td>'+
+      '<td>'+(d.website==="N/A"?'<span class="td-na">N/A</span>':'<a href="'+d.website+'" target="_blank" class="website-link">'+wshort+'</a>')+'</td>'+
+      '<td><div class="score-wrap"><span class="score-num" style="color:'+col+'">'+d.score+'</span><div class="score-bar"><div class="score-fill" style="width:'+d.score+'%;background:'+col+'"></div></div></div></td>'+
+      '<td><span class="tier-badge '+tierClass(d.tierLabel)+'">'+d.tierLabel+'</span></td>'+
+      '</tr>';
+  }).join("");
+}
+
+function filter(){
+  const q=document.getElementById("searchInput").value.toLowerCase();
+  const spec=document.getElementById("specialtyFilter").value;
+  const tier=document.getElementById("tierFilter").value;
+  render(DATA.filter(d=>
+    (!q||(d.name+d.area+d.specialty).toLowerCase().includes(q))&&
+    (!spec||d.specialty===spec)&&
+    (!tier||d.tierLabel===tier)
+  ));
+}
+
+document.getElementById("searchInput").addEventListener("input",filter);
+document.getElementById("specialtyFilter").addEventListener("change",filter);
+document.getElementById("tierFilter").addEventListener("change",filter);
+
+populateSpecialtyFilter();
+buildTopAccounts();
+render(DATA);
+</script>
+</body>
+</html>
