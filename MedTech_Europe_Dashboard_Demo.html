@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadFlow — Market Intelligence Dashboard · European MedTech</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--surface:#0c1018;--card:#101520;--border:#1a2535;--accent:#0ea5e9;--accent2:#38bdf8;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--teal:#14b8a6;--text:#e2e8f0;--muted:#4e6280;--faint:#141c28;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(14,165,233,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,0.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(14,165,233,0.07) 0%,transparent 65%);top:-250px;right:-200px;}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%);bottom:-100px;left:-150px;}
+
+.intel-banner{position:relative;z-index:10;background:linear-gradient(135deg,rgba(14,165,233,0.1),rgba(14,165,233,0.04));border-bottom:1px solid rgba(14,165,233,0.2);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);letter-spacing:0.5px;text-align:center;}
+.intel-banner strong{color:#fff;}
+
+header{position:sticky;top:0;z-index:100;background:rgba(7,9,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;}
+.logo span{color:var(--accent);}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:-2px;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.live-pill{display:flex;align-items:center;gap:6px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:20px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+.intel-pill{display:flex;align-items:center;gap:6px;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.2);padding:5px 12px;border-radius:20px;font-size:11px;color:var(--accent2);font-family:'JetBrains Mono',monospace;}
+
+.hero{position:relative;z-index:1;padding:48px 24px 32px;text-align:center;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.15);padding:4px 14px;border-radius:20px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-family:'JetBrains Mono',monospace;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,60px);letter-spacing:2px;line-height:0.95;color:#fff;margin-bottom:14px;}
+h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:540px;margin:0 auto 28px;line-height:1.75;}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:480px;margin:0 auto 12px;}
+.kpi-wide{grid-column:span 2;}
+.kpi{background:var(--card);border:1px solid var(--border);padding:14px 16px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative;overflow:hidden;}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.kpi-blue::before{background:linear-gradient(90deg,var(--accent),transparent);}
+.kpi-green::before{background:linear-gradient(90deg,var(--green),transparent);}
+.kpi-amber::before{background:linear-gradient(90deg,var(--amber),transparent);}
+.kpi-purple::before{background:linear-gradient(90deg,var(--purple),transparent);}
+.kpi-teal::before{background:linear-gradient(90deg,var(--teal),transparent);}
+.kpi-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:1px;line-height:1;}
+.kpi-val .accent{color:var(--accent);}
+.kpi-val .green{color:var(--green);}
+.kpi-val .amber{color:var(--amber);}
+.kpi-val .purple{color:var(--purple);}
+.kpi-val .teal{color:var(--teal);}
+.kpi-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;text-align:center;}
+
+.refresh-banner{position:relative;z-index:1;margin:0 16px 16px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(16,185,129,0.05));border:1px solid rgba(14,165,233,0.15);border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.rb-left{display:flex;align-items:center;gap:10px;}
+.rb-icon{font-size:20px;}
+.rb-title{font-size:13px;font-weight:600;color:#fff;}
+.rb-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.rb-badge{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);padding:5px 12px;border-radius:8px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+
+.exec-summary{position:relative;z-index:1;margin:0 16px 16px;background:rgba(14,165,233,0.04);border:1px solid rgba(14,165,233,0.15);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;}
+.exec-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.exec-title span{color:var(--accent);}
+.exec-body{font-size:13px;color:var(--muted);line-height:1.75;}
+.exec-body strong{color:var(--text);}
+.exec-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.exec-pill{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.ep-blue{background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.2);color:var(--accent2);}
+.ep-green{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:var(--green);}
+.ep-amber{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--amber);}
+.ep-purple{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);color:var(--purple);}
+
+.section{position:relative;z-index:1;padding:0 16px 20px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.section-title span{color:var(--accent);}
+
+.top-accounts{display:flex;flex-direction:column;gap:10px;}
+.top-account{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start;}
+.ta-rank{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);min-width:32px;line-height:1;opacity:0.6;}
+.ta-body{flex:1;}
+.ta-name{font-weight:600;color:#fff;font-size:14px;margin-bottom:3px;}
+.ta-area{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.ta-reasons{display:flex;gap:6px;flex-wrap:wrap;}
+.ta-reason{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;border-radius:4px;white-space:nowrap;}
+.tr-rating{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--amber);}
+.tr-reviews{background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.2);color:var(--accent2);}
+.tr-service{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:var(--green);}
+.tr-tech{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);color:var(--purple);}
+.tr-booking{background:rgba(20,184,166,0.1);border:1px solid rgba(20,184,166,0.2);color:var(--teal);}
+
+.insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.insight-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.insight-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.insight-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;}
+.insight-row:last-child{margin-bottom:0;}
+.ir-label{font-size:12px;color:var(--text);flex:1;}
+.ir-bar{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.ir-fill{height:100%;border-radius:2px;}
+.ir-val{font-family:'JetBrains Mono',monospace;font-size:11px;min-width:32px;text-align:right;}
+
+.controls{position:relative;z-index:1;padding:0 16px 14px;display:flex;flex-direction:column;gap:10px;}
+.search-wrap{position:relative;}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);}
+input[type=text]{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px 10px 36px;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;}
+input[type=text]:focus{border-color:var(--accent);}
+input[type=text]::placeholder{color:var(--muted);}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+select{flex:1;min-width:110px;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
+select:focus{border-color:var(--accent);}
+.count-badge{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right;}
+.count-badge strong{color:var(--accent);}
+
+.table-wrap{position:relative;z-index:1;padding:0 16px 80px;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100vw;}
+table{width:100%;border-collapse:collapse;min-width:1150px;}
+html,body{max-width:100%;overflow-x:hidden;}
+thead tr{background:var(--surface);border-bottom:1px solid var(--border);}
+th{padding:10px 12px;text-align:left;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+tbody tr{border-bottom:1px solid rgba(26,37,53,0.6);transition:background 0.15s;}
+tbody tr:hover{background:var(--faint);}
+td{padding:11px 12px;font-size:12px;vertical-align:middle;}
+.td-name{font-weight:500;color:#fff;max-width:220px;}
+.td-name-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.td-addr{font-size:11px;color:var(--muted);max-width:220px;line-height:1.4;}
+.td-na{font-size:10px;color:var(--muted);opacity:0.4;font-style:italic;font-family:'JetBrains Mono',monospace;}
+.website-link{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-decoration:none;}
+.website-link:hover{color:var(--accent2);text-decoration:underline;}
+.tier-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.tier-t1{background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
+.tier-t2{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.tier-t3{background:rgba(100,116,139,0.1);color:#64748b;border:1px solid rgba(100,116,139,0.2);}
+.cat-badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.cat-a{background:rgba(14,165,233,0.1);color:var(--accent2);border:1px solid rgba(14,165,233,0.2);}
+.cat-b{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:13px;}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:20px 24px;text-align:center;font-size:11px;color:var(--muted);}
+footer strong{color:var(--text);}
+.footer-note{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15);padding:5px 14px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent2);}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="intel-banner">
+  📋 &nbsp;<strong>REGULATORY INTELLIGENCE</strong>&nbsp; — Europe · Funded MedTech · Identifying Companies Before They Need You
+</div>
+
+<header>
+  <div>
+    <div class="logo">Lead<span>Flow</span></div>
+    <div class="logo-sub">Market Intelligence Platform</div>
+  </div>
+  <div class="header-right">
+    <div class="live-pill"><div class="dot"></div>Live Intelligence</div>
+    <div class="intel-pill">📋 Verified</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-tag">🇪🇺 Europe · Funded MedTech · Regulatory Opportunity</div>
+  <h1>EUROPEAN MEDTECH<br><span>INTELLIGENCE</span></h1>
+  <p class="hero-sub">Identify funded European medical device and device-software companies before their regulatory window closes — and before your competitors find them.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi kpi-blue">
+      <div class="kpi-val"><span class="accent" id="totalCount">5</span></div>
+      <div class="kpi-lbl">Companies Identified</div>
+    </div>
+    <div class="kpi kpi-green">
+      <div class="kpi-val"><span class="green" id="t1Count">4</span></div>
+      <div class="kpi-lbl">Qualified Opportunities</div>
+    </div>
+    <div class="kpi kpi-purple">
+      <div class="kpi-val"><span class="purple">4</span></div>
+      <div class="kpi-lbl">Countries Covered</div>
+    </div>
+    <div class="kpi kpi-teal">
+      <div class="kpi-val"><span class="teal">€10.7M</span></div>
+      <div class="kpi-lbl">Combined Funding Tracked</div>
+    </div>
+    <div class="kpi kpi-wide kpi-amber">
+      <div class="kpi-val"><span class="amber">4</span></div>
+      <div class="kpi-lbl">Regulatory Windows Currently Open</div>
+    </div>
+  </div>
+</section>
+
+<div class="refresh-banner" style="position:relative;z-index:1;">
+  <div class="rb-left">
+    <div class="rb-icon">🔄</div>
+    <div>
+      <div class="rb-title">Market Intelligence — Sample Preview</div>
+      <div class="rb-sub">Territory analysis: June 2026 · Europe · Funded MedTech Opportunity Tracking</div>
+    </div>
+  </div>
+  <div class="rb-badge">Quarterly Refresh · Regulatory Window Tracked</div>
+</div>
+
+<div class="exec-summary">
+  <div class="exec-title">📊 Executive <span>Intelligence Summary</span></div>
+  <div class="exec-body">
+    Most regulatory consultancies find funded medtech companies too late, once the deal has already gone to a competitor. LeadFlow mapped the European medtech funding landscape and surfaced <strong>funded device and device-software companies still inside their regulatory window</strong> — giving business development teams a prioritized view before the approval opportunity closes.<br><br>
+    This sample identified <strong>4 qualified opportunities</strong> across <strong>4 countries</strong>, each funded and still pre-approval, plus <strong>1 early-signal company</strong> showing public signs of raising before it hits the news. Combined tracked funding across the sample totals <strong>€10.7M</strong> — all within the €500K–€10M target band.
+  </div>
+  <div class="exec-pills">
+    <div class="exec-pill ep-green">✓ 4 Qualified Opportunities Identified</div>
+    <div class="exec-pill ep-blue">✓ 4 Countries Mapped</div>
+    <div class="exec-pill ep-amber">✓ 1 Early-Signal Company Flagged</div>
+    <div class="exec-pill ep-purple">✓ Full European Coverage Available</div>
+  </div>
+</div>
+
+<!-- TOP PRIORITY ACCOUNTS -->
+<div class="section">
+  <div class="section-title">🏆 Top Priority <span>Opportunities</span></div>
+  <div class="top-accounts" id="topAccounts"></div>
+</div>
+
+<!-- WHY COMPANIES APPEAR -->
+<div class="section">
+  <div class="section-title">🎯 Why Companies <span>Appear Here</span></div>
+  <div class="exec-summary" style="margin:0 0 0 0;">
+    <div class="exec-body">
+      <strong>Every company in this intelligence brief is selected against four criteria:</strong>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Verified Funding</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:6px;">Confirmed Capital Activity</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Funding is confirmed and sits within the €500K–€10M target band — budget to spend on regulatory work.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Genuine Device / SaMD</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:6px;">Real Regulated Product</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Confirmed to be building a genuine medical device or Software as a Medical Device — not general wellness.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:8px;">Active Opportunity</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:6px;">Regulatory Window Still Open</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Still pre-approval. Companies already CE-marked or FDA-cleared are screened out — the need has passed.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Market Verification</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:6px;">Manually Confirmed</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Each entry is manually verified against public sources before it's included — not automated guesswork.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSIGHTS -->
+<div class="section">
+  <div class="section-title">📈 Market <span>Intelligence Insights</span></div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7;">Strategic observations derived from the European medtech sample.</p>
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-title">Company Type</div>
+      <div class="insight-row"><div class="ir-label">Hardware Device</div><div class="ir-bar"><div class="ir-fill" style="width:40%;background:var(--accent)"></div></div><div class="ir-val" style="color:var(--accent)">40%</div></div>
+      <div class="insight-row"><div class="ir-label">Device + Software</div><div class="ir-bar"><div class="ir-fill" style="width:40%;background:var(--accent)"></div></div><div class="ir-val" style="color:var(--accent)">40%</div></div>
+      <div class="insight-row"><div class="ir-label">Software (SaMD)</div><div class="ir-bar"><div class="ir-fill" style="width:20%;background:var(--accent)"></div></div><div class="ir-val" style="color:var(--accent)">20%</div></div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-title">Opportunity Status</div>
+      <div class="insight-row"><div class="ir-label">High Opportunity</div><div class="ir-bar"><div class="ir-fill" style="width:60%;background:var(--green)"></div></div><div class="ir-val" style="color:var(--green)">60%</div></div>
+      <div class="insight-row"><div class="ir-label">Active Opportunity</div><div class="ir-bar"><div class="ir-fill" style="width:20%;background:var(--amber)"></div></div><div class="ir-val" style="color:var(--amber)">20%</div></div>
+      <div class="insight-row"><div class="ir-label">Watchlist</div><div class="ir-bar"><div class="ir-fill" style="width:20%;background:#64748b"></div></div><div class="ir-val" style="color:#64748b">20%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search company, country, device type...">
+  </div>
+  <div class="filter-row">
+    <select id="countryFilter"><option value="">All Countries</option></select>
+    <select id="catFilter">
+      <option value="">All Categories</option>
+      <option value="Confirmed">Verified Funding</option>
+      <option value="Signal">Early Signal</option>
+    </select>
+    <select id="statusFilter">
+      <option value="">All Opportunity Status</option>
+      <option value="High Opportunity">High Opportunity</option>
+      <option value="Active Opportunity">Active Opportunity</option>
+      <option value="Watchlist">Watchlist</option>
+    </select>
+  </div>
+  <div class="count-badge">Showing <strong id="countDisplay">5</strong> companies</div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Company</th><th>Country</th><th>City</th><th>What They Build</th>
+        <th>Device / Software</th><th>Funding</th><th>Funding Status</th><th>Website</th>
+        <th>Regulatory Status</th><th>Opportunity Status</th><th>Engagement Window</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="empty" id="emptyState" style="display:none;">No companies match your filters</div>
+</div>
+
+<footer>
+  <strong>LeadFlow</strong> · Market Intelligence Platform · Europe · Funded MedTech Regulatory Opportunity Tracking<br>
+  <div class="footer-note">📋 Regulatory Intelligence · Opportunity Tracking · Verified Market Data · LeadFlow</div>
+</footer>
+
+<script>
+const DATA=[
+{name:"Vivalyx",country:"Germany",city:"Aachen",what:"Omnisol \u2014 blood-replacing organ-preservation perfusate",devsw:"Device",funding:"\u20ac5.4M + \u20ac2.5M grant",fundingStatus:"Verified Funding",cat:"Confirmed",regStatus:"Clinical",oppStatus:"High Opportunity",engagement:"Immediate",fit:"First-in-human kidney trial underway; actively pursuing MDR approval, not yet certified"},
+{name:"STENTiT",country:"Netherlands",city:"Eindhoven",what:"Resorbable scaffold \u2014 regenerative vascular implant",devsw:"Device",funding:"~\u20ac1.8M + grant",fundingStatus:"Verified Funding",cat:"Confirmed",regStatus:"Clinical",oppStatus:"High Opportunity",engagement:"Immediate",fit:"First-in-human study just underway; Class III implant, years from approval"},
+{name:"CergenX",country:"Ireland",city:"Cork",what:"Wave \u2014 AI neonatal brain-monitoring (EEG)",devsw:"Software (SaMD)",funding:"~\u20ac2M + grant",fundingStatus:"Verified Funding",cat:"Confirmed",regStatus:"Preparing Submission",oppStatus:"High Opportunity",engagement:"Immediate",fit:"FDA Breakthrough Designation; advancing approval in EU & US, not yet cleared"},
+{name:"Amazec Photonics",country:"Netherlands",city:"Eindhoven",what:"Photonics cardiovascular monitoring & diagnostics",devsw:"Device + Software",funding:"\u20ac1.5M",fundingStatus:"Verified Funding",cat:"Confirmed",regStatus:"Pre-Clinical",oppStatus:"Active Opportunity",engagement:"Next 3\u20136 Months",fit:"Building prototypes, entering clinical trials; EU market entry targeted 2028"},
+{name:"Dermagnostix",country:"Germany",city:"Freiburg",what:"Molecular diagnostics platform for dermatology",devsw:"Device (IVD) + Software",funding:"Round in progress",fundingStatus:"Actively Raising",cat:"Signal",regStatus:"Pre-Clinical",oppStatus:"Watchlist",engagement:"Monitor",fit:"Raising a larger round for new-product pipeline needing fresh regulatory clearance"},
+];
+
+function oppClass(s){return s==="High Opportunity"?"tier-t1":s==="Active Opportunity"?"tier-t2":"tier-t3";}
+function catClass(c){return c==="Confirmed"?"cat-a":"cat-b";}
+const oppOrder={"High Opportunity":0,"Active Opportunity":1,"Watchlist":2};
+
+function buildTopAccounts(){
+  const top=[...DATA].sort((a,b)=>oppOrder[a.oppStatus]-oppOrder[b.oppStatus]).slice(0,5);
+  const html=top.map((d,i)=>{
+    const drivers=[];
+    if(d.cat==="Confirmed")drivers.push('<span class="ta-reason tr-rating">Verified Funding</span>');
+    else drivers.push('<span class="ta-reason tr-rating">Early Signal</span>');
+    drivers.push('<span class="ta-reason tr-reviews">'+d.regStatus+'</span>');
+    if(d.devsw.includes("Software"))drivers.push('<span class="ta-reason tr-tech">SaMD Component</span>');
+    if(d.devsw.includes("Device"))drivers.push('<span class="ta-reason tr-service">Hardware Device</span>');
+    drivers.push('<span class="ta-reason tr-booking">'+d.engagement+'</span>');
+    const oppBadge='<span class="tier-badge '+oppClass(d.oppStatus)+'" style="margin-left:4px;">'+d.oppStatus+'</span>';
+    return'<div class="top-account"><div class="ta-rank">0'+(i+1)+'</div><div class="ta-body"><div class="ta-name">'+d.name+'</div><div class="ta-area">'+oppBadge+' '+d.country+'</div><div class="ta-reasons" style="margin-top:8px;">'+drivers.join("")+'</div></div></div>';
+  }).join("");
+  document.getElementById("topAccounts").innerHTML=html;
+}
+
+function populateCountryFilter(){
+  const countries=[...new Set(DATA.map(d=>d.country))].sort();
+  const sel=document.getElementById("countryFilter");
+  countries.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
+}
+
+function updateStats(data){
+  document.getElementById("countDisplay").textContent=data.length;
+}
+
+function render(data){
+  const tbody=document.getElementById("tableBody");
+  const empty=document.getElementById("emptyState");
+  updateStats(data);
+  if(!data.length){tbody.innerHTML="";empty.style.display="block";return;}
+  empty.style.display="none";
+  tbody.innerHTML=[...data].sort((a,b)=>oppOrder[a.oppStatus]-oppOrder[b.oppStatus]).map((d,i)=>{
+    const wshort=d.website==="\u2014"?"\u2014":d.website;
+    return'<tr>'+
+      '<td style="color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px;">'+(i+1)+'</td>'+
+      '<td><div class="td-name">'+d.name+'</div><div class="td-name-sub">'+d.fit.substring(0,42)+'\u2026</div></td>'+
+      '<td style="font-size:12px;color:var(--text);white-space:nowrap">'+d.country+'</td>'+
+      '<td style="font-size:12px;color:var(--text);white-space:nowrap">'+d.city+'</td>'+
+      '<td class="td-addr">'+d.what+'</td>'+
+      '<td style="font-size:11px;color:var(--text);white-space:nowrap">'+d.devsw+'</td>'+
+      '<td style="font-family:JetBrains Mono,monospace;font-size:11px;color:var(--accent2);white-space:nowrap">'+d.funding+'</td>'+
+      '<td><span class="cat-badge '+catClass(d.cat)+'">'+d.fundingStatus+'</span></td>'+
+      '<td>'+(wshort==="\u2014"?'<span class="td-na">N/A</span>':'<a href="https://'+wshort+'" target="_blank" class="website-link">'+wshort+'</a>')+'</td>'+
+      '<td style="font-size:11px;color:var(--text);white-space:nowrap">'+d.regStatus+'</td>'+
+      '<td><span class="tier-badge '+oppClass(d.oppStatus)+'">'+d.oppStatus+'</span></td>'+
+      '<td style="font-family:JetBrains Mono,monospace;font-size:10px;color:var(--muted);white-space:nowrap">'+d.engagement+'</td>'+
+      '</tr>';
+  }).join("");
+}
+
+function filter(){
+  const q=document.getElementById("searchInput").value.toLowerCase();
+  const country=document.getElementById("countryFilter").value;
+  const cat=document.getElementById("catFilter").value;
+  const status=document.getElementById("statusFilter").value;
+  render(DATA.filter(d=>
+    (!q||(d.name+d.country+d.what+d.devsw).toLowerCase().includes(q))&&
+    (!country||d.country===country)&&
+    (!cat||d.cat===cat)&&
+    (!status||d.oppStatus===status)
+  ));
+}
+
+document.getElementById("searchInput").addEventListener("input",filter);
+document.getElementById("countryFilter").addEventListener("change",filter);
+document.getElementById("catFilter").addEventListener("change",filter);
+document.getElementById("statusFilter").addEventListener("change",filter);
+
+populateCountryFilter();
+buildTopAccounts();
+render(DATA);
+</script>
+</body>
+</html>
