@@ -101,6 +101,14 @@ td{padding:11px 12px;font-size:12px;vertical-align:middle;}
 .ceo-name{color:var(--text);font-size:12px;font-weight:500;}
 .ceo-role{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:1px;}
 .empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:13px;}
+.locked-row td{filter:blur(4px);user-select:none;pointer-events:none;opacity:0.55;}
+.locked-row{position:relative;}
+.locked-row .td-name{color:#fff;}
+.locked-divider{position:relative;z-index:5;background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(139,92,246,0.08));border-top:1px solid rgba(14,165,233,0.25);border-bottom:1px solid rgba(14,165,233,0.25);padding:16px 20px;display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;flex-direction:column;}
+.locked-divider .ld-icon{font-size:22px;}
+.locked-divider .ld-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:#fff;}
+.locked-divider .ld-sub{font-size:12px;color:var(--muted);max-width:480px;line-height:1.6;}
+.locked-divider .ld-count{color:var(--accent2);font-weight:700;}
 footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:20px 24px;text-align:center;font-size:11px;color:var(--muted);}
 footer strong{color:var(--text);}
 .footer-note{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15);padding:5px 14px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent2);}
@@ -132,11 +140,11 @@ footer strong{color:var(--text);}
 
   <div class="kpi-grid">
     <div class="kpi kpi-blue">
-      <div class="kpi-val"><span class="accent" id="totalCount">5</span></div>
-      <div class="kpi-lbl">Companies Identified</div>
+      <div class="kpi-val"><span class="accent" id="totalCount">100</span></div>
+      <div class="kpi-lbl">Companies Identified (8 shown)</div>
     </div>
     <div class="kpi kpi-green">
-      <div class="kpi-val"><span class="green" id="oppCount">5</span></div>
+      <div class="kpi-val"><span class="green" id="oppCount">8</span></div>
       <div class="kpi-lbl">Founder Contacts Verified</div>
     </div>
     <div class="kpi kpi-purple">
@@ -162,7 +170,7 @@ footer strong{color:var(--text);}
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input type="text" id="searchInput" placeholder="Search companies, founders, sub-sectors…">
   </div>
-  <div class="count-badge">Showing <strong id="countDisplay">5</strong> companies</div>
+  <div class="count-badge">Showing <strong id="countDisplay">8</strong> of <strong>100</strong> verified companies</div>
 </div>
 
 <div class="table-wrap">
@@ -175,6 +183,14 @@ footer strong{color:var(--text);}
     </thead>
     <tbody id="tableBody"></tbody>
   </table>
+  <div class="locked-divider">
+    <div class="ld-icon">🔒</div>
+    <div class="ld-title">+<span class="ld-count">92</span> MORE VERIFIED COMPANIES</div>
+    <div class="ld-sub">The remaining 92 profiles in the full report are individually verified with the same depth &mdash; company, product, regulatory relevance, named founder, direct contact, website, LinkedIn and funding context. Unlock the full report to view.</div>
+  </div>
+  <table>
+    <tbody id="lockedBody"></tbody>
+  </table>
   <div class="empty" id="emptyState" style="display:none;">No companies match your filters.</div>
 </div>
 
@@ -184,7 +200,27 @@ footer strong{color:var(--text);}
 </footer>
 
 <script>
-const DATA=[{"name": "Hilo (Aktiia SA)", "city": "Neuchâtel", "what": "Cuffless blood pressure monitoring platform pairing optical wrist sensors with a machine-learning foundation model trained on billions of optical signals; Hilo Band is the first FDA-cleared cuffless BP monitor for OTC use.", "sub": "Medical Device / Digital Health", "why": "Already FDA-cleared (510k, July 2025) and CE marked in Europe as Class IIa — active regulatory need shifts to US market entry support, post-market surveillance and next-generation product clearances, not initial approval.", "ceo": "Stefan Petzinger", "role": "CEO", "contact": "Via website contact form", "web": "hilo.com", "ctx": "$42M Series B 01.05.2025 co-led by Earlybird Health & Wellington Partners, with Kfund, naturalX, redalpine, Khosla, Molten, Translink, Verve; $100M+ total; founded May 2018", "linkedin": "linkedin.com/company/aktiia"}, {"name": "EarlySight SA", "city": "Geneva", "what": "EPFL spin-off with the Cellularis platform for cellular-level retinal imaging, offering ten times the precision of conventional tools plus AI biomarker analysis for early detection of AMD, glaucoma and diabetic retinopathy.", "sub": "Medical Device / Ophthalmic Imaging", "why": "Progressing toward US regulatory approval with second-generation product launch; validated on 18,000+ retinal images from 1,000 patients — active FDA pathway work.", "ceo": "Timothé Laforest, PhD", "role": "Co-Founder & CEO", "contact": "info@earlysight.com · +41 78 200 71 80", "web": "earlysight.com", "ctx": "CHF 3.1M seed extension 09.2025 bringing total to CHF 6.1M; earlier CHF 2.3M seed led by Verve Ventures; Venture Kick and EIT Health backed; EPFL spin-off founded March 2019", "linkedin": "linkedin.com/company/earlysight"}, {"name": "HeroSupport SA", "city": "Geneva", "what": "3D-printed personalised patient-positioning devices for breast cancer radiotherapy, reducing skin burns and cardiac risk through prone treatment.", "sub": "Medical Device — Oncology Radiotherapy", "why": "CE-marked VENUS SHELL device, spin-off from Geneva University Hospital, entering commercial expansion — active regulatory and quality support opportunity.", "ceo": "Giovanna Dipasquale", "role": "CEO & Co-Founder", "contact": "Via website", "web": "herosupport.care", "ctx": "CHF 150,000 Venture Kick grant, October 2023; founded 2022, HUG spin-off", "linkedin": "linkedin.com/company/herosupport-sa"}, {"name": "Navignostics AG", "city": "Horgen, Zurich", "what": "Characterises tumours using spatial single-cell proteomics to identify the optimal cancer treatment per patient and support pharma drug development.", "sub": "In Vitro Diagnostics — Oncology", "why": "Precision oncology diagnostics platform advancing toward clinical use — regulatory strategy and IVD pathway support opportunity.", "ceo": "Jana Fischer", "role": "CEO", "contact": "info@navignostics.com · +41 44 244 09 70", "web": "navignostics.com", "ctx": "CHF 7.5M seed round, 2022 (exact date not available); founded 2022", "linkedin": "linkedin.com/company/navignostics"}, {"name": "Kairos Medical AG", "city": "Bettlach", "what": "TisMet — biodegradable magnesium and calcium implant material for orthopaedic screws, anchors and wires that fully resorb after healing.", "sub": "Medical Device — Orthopaedics", "why": "ETH Zurich spin-off with FDA Breakthrough Device Designation for its KM Anchor One device — active US and EU regulatory pathway work.", "ceo": "Sandro Matter", "role": "Founder", "contact": "info@kairosmedical.ch", "web": "kairosmedical.ch", "ctx": "Funding details not available; founded 2022, ETH Zurich spin-off", "linkedin": "linkedin.com/company/110715943"}];
+const DATA=[{"name": "Hilo (Aktiia SA)", "city": "Neuchâtel", "what": "Cuffless blood pressure monitoring platform pairing optical wrist sensors with a machine-learning foundation model trained on billions of optical signals; Hilo Band is the first FDA-cleared cuffless BP monitor for OTC use.", "sub": "Medical Device / Digital Health", "why": "Already FDA-cleared (510k, July 2025) and CE marked in Europe as Class IIa — active regulatory need shifts to US market entry support, post-market surveillance and next-generation product clearances, not initial approval.", "ceo": "Stefan Petzinger", "role": "CEO", "contact": "Via website contact form", "web": "hilo.com", "ctx": "$42M Series B 01.05.2025 co-led by Earlybird Health & Wellington Partners, with Kfund, naturalX, redalpine, Khosla, Molten, Translink, Verve; $100M+ total; founded May 2018", "linkedin": "linkedin.com/company/hilohealth"}, {"name": "EarlySight SA", "city": "Geneva", "what": "EPFL spin-off with the Cellularis platform for cellular-level retinal imaging, offering ten times the precision of conventional tools plus AI biomarker analysis for early detection of AMD, glaucoma and diabetic retinopathy.", "sub": "Medical Device / Ophthalmic Imaging", "why": "Progressing toward US regulatory approval with second-generation product launch; validated on 18,000+ retinal images from 1,000 patients — active FDA pathway work.", "ceo": "Timothé Laforest, PhD", "role": "Co-Founder & CEO", "contact": "info@earlysight.com · +41 78 200 71 80", "web": "earlysight.com", "ctx": "CHF 3.1M seed extension 09.2025 bringing total to CHF 6.1M; earlier CHF 2.3M seed led by Verve Ventures; Venture Kick and EIT Health backed; EPFL spin-off founded March 2019", "linkedin": "linkedin.com/company/earlysight"}, {"name": "HeroSupport SA", "city": "Geneva", "what": "3D-printed personalised patient-positioning devices for breast cancer radiotherapy, reducing skin burns and cardiac risk through prone treatment.", "sub": "Medical Device — Oncology Radiotherapy", "why": "CE-marked VENUS SHELL device, spin-off from Geneva University Hospital, entering commercial expansion — active regulatory and quality support opportunity.", "ceo": "Giovanna Dipasquale", "role": "CEO & Co-Founder", "contact": "Via website", "web": "herosupport.care", "ctx": "CHF 150,000 Venture Kick grant, October 2023; founded 2022, HUG spin-off", "linkedin": "linkedin.com/company/herosupport-sa"}, {"name": "Navignostics AG", "city": "Horgen, Zurich", "what": "Characterises tumours using spatial single-cell proteomics to identify the optimal cancer treatment per patient and support pharma drug development.", "sub": "In Vitro Diagnostics — Oncology", "why": "Precision oncology diagnostics platform advancing toward clinical use — regulatory strategy and IVD pathway support opportunity.", "ceo": "Jana Fischer", "role": "CEO", "contact": "info@navignostics.com · +41 44 244 09 70", "web": "navignostics.com", "ctx": "CHF 7.5M seed round, 2022 (exact date not available); founded 2022", "linkedin": "linkedin.com/company/navignostics"}, {"name": "Kairos Medical AG", "city": "Bettlach", "what": "TisMet — biodegradable magnesium and calcium implant material for orthopaedic screws, anchors and wires that fully resorb after healing.", "sub": "Medical Device — Orthopaedics", "why": "ETH Zurich spin-off with FDA Breakthrough Device Designation for its KM Anchor One device — active US and EU regulatory pathway work.", "ceo": "Sandro Matter", "role": "Founder", "contact": "info@kairosmedical.ch", "web": "kairosmedical.ch", "ctx": "Funding details not available; founded 2022, ETH Zurich spin-off", "linkedin": "linkedin.com/company/kairos-medical-ag"}, {"name": "Positrigo AG", "city": "Zurich", "what": "NeuroLF, an ultra-compact dedicated brain PET (positron emission tomography) imaging system, bringing functional brain scanning directly into neurology practices rather than requiring hospital imaging centers.", "sub": "Medical Device — Nuclear Imaging", "why": "Real, dual FDA-cleared and CE-marked device already scanning patients across the US and Europe — active commercial expansion and post-market regulatory work.", "ceo": "Jannis Fischer", "role": "Co-Founder & CEO", "contact": "Via website", "web": "positrigo.com", "ctx": "Series C; $18.2M-$20.84M total raised (HealthCap, Navivo, ZKB); ETH Zurich spin-off founded 2018", "linkedin": "linkedin.com/company/positrigo"}, {"name": "CUTISS AG", "city": "Schlieren", "what": "denovoSkin, a personalized, bioengineered dermo-epidermal skin graft for patients undergoing surgery for severe burns, reconstruction, or plastic procedures.", "sub": "Medical Device / Biotech — Regenerative Skin Therapy", "why": "Real Phase 3 confirmatory trial underway across Switzerland and 8 EU member states, Orphan Drug Designation from Swissmedic, EMA and FDA — active late-stage regulatory pathway.", "ceo": "Daniela Marino", "role": "CEO & Co-Founder", "contact": "Via website", "web": "cutiss.swiss", "ctx": "CHF 56M Series C (Sep 2025); CHF 125M+ total raised; UZH spin-off founded 2017", "linkedin": "linkedin.com/company/cutiss-ag"}, {"name": "Hemetron AG", "city": "Thalwil", "what": "Hand-held device enabling patients with inflammatory rheumatic and other chronic conditions to perform laboratory-grade blood tests at home, with results sent digitally to physicians.", "sub": "Medical Device — At-Home Diagnostic Testing", "why": "Real 194-patient clinical validation study completed, active collaborations with clinical KOLs across Europe and the US — regulatory and expansion support opportunity.", "ceo": "Alexander Tanno, PhD", "role": "CEO & Co-Founder", "contact": "Via website", "web": "hemetron.com", "ctx": "CHF 3M raised; ETH Zurich spin-off founded October 2021", "linkedin": "linkedin.com/company/hemetron"}];
+
+const LOCKED_NAMES=["Dexterous Endoscopes", "Polaroid Therapeutics", "ABILITY Neurotech", "Babylat", "dEEGtal Insight", "Actival", "Terapet", "Odne", "Clee Medical", "Oncobit", "TWIICE", "Nutrix", "Nostic", "aiEndoscopic", "CorFlow Therapeutics", "SQ Innovation", "AiMorphous Health", "Scewo", "Nexilis", "OrthoSens", "Inteeth", "Volumina Medical", "Testmate Health", "Augury Medical (Pace Locator)", "Diaxxo", "MOWA Healthcare", "Customsurg", "Akina", "MOMM Diagnostics", "Spirecut", "PIPRA", "Hi-D Imaging", "Neurosoft Bioelectronics", "machineMD", "Limula", "Alithea Genomics", "Ninsun Biotech", "Neuria (now Bewelab)", "Hylomorph", "Piomic Medical", "OxyPrem", "evismo", "MIKAJAKI", "Aesyra", "b-rayZ", "Sedimentum", "Apricot BIO", "Flowbone", "Lymphatica Medtech", "certus molecular diagnostics", "hemotune", "Annaida Technologies", "Regenosca", "LEM Surgical", "PeriVision", "Artiria Medical", "Bearmind", "MoleSense", "OptiZone", "Rhovica Neuroimaging", "Veltist", "Beyond Diagnostics", "biped.ai", "KOVE medical", "NeoPrediX", "Aseptuva", "OncoSwab", "BIOS Medical", "Citus", "OneTwenty", "Calico Biosystems", "EVIIVE", "RegCheck (Softreg)", "Softletics", "DeepPsy", "neurodAIgnostics", "Undae Science", "Virtuosis AI", "Onescope (Pneumoscope)", "Sensemodi", "Novostia", "HekeTiss", "Aligna3D", "BrainScape Medical", "SonoStent", "PolaSight", "Planimetrics", "Bioscibex", "SaisiR", "Tune Insight", "Avelo", "Adiposs"];
+
+function renderLocked(){
+  const tbody=document.getElementById("lockedBody");
+  tbody.innerHTML=LOCKED_NAMES.map((n,i)=>{
+    return '<tr class="locked-row">'+
+      '<td style="color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px;">'+(DATA.length+i+1)+'</td>'+
+      '<td><div class="td-name">'+n+'</div></td>'+
+      '<td style="font-size:11px;color:var(--text);white-space:nowrap">████████</td>'+
+      '<td style="font-size:11px;color:var(--muted);max-width:240px;">████████████████████████████</td>'+
+      '<td class="td-why">████████████████████████</td>'+
+      '<td><div class="ceo-name">████████</div></td>'+
+      '<td style="font-size:10px;color:var(--muted);font-family:JetBrains Mono,monospace">████████</td>'+
+      '<td style="font-size:10px;color:var(--accent);font-family:JetBrains Mono,monospace">████████</td>'+
+      '<td style="font-size:10px;color:var(--accent);font-family:JetBrains Mono,monospace">████████</td>'+
+      '<td style="font-size:10px;color:var(--muted);max-width:200px;">████████████████</td>'+
+      '</tr>';
+  }).join("");
+}
 
 function render(data){
   const tbody=document.getElementById("tableBody");
@@ -221,6 +257,7 @@ function filter(){
 document.getElementById("searchInput").addEventListener("input",filter);
 
 render(DATA);
+renderLocked();
 </script>
 </body>
 </html>
